@@ -3,10 +3,10 @@ package vo;
 import java.util.Date;
 
 public class BookManageVO {
-	private BookVO book;
-	private UserVO user;
-	private Date startDate;
-	private Date endDate;
+	private BookVO book;//대여한 책 정보
+	private UserVO user;//대여한 사용자 정보
+	private Date startDate;//대여일
+	private Date endDate;//반납일
 	
 	public BookVO getBook() {
 		return book;
