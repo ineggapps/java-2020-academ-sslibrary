@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,15 +20,20 @@ public class LibraryServiceImpl implements LibraryService {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
 		boolean isGoing = true;
 		while (isGoing) {
-			if (session == null || session.size() == 0) {
-				// 비로그인 상태
-				isGoing = showDefaultMenu();
-			} else if (session.containsKey(ADMIN_ID)) {
-				// 관리자 상태
-				isGoing = showAdminMenu();
-			} else {
-				// 일반 유저 상태
-				isGoing = showUserMenu();
+			try {
+				if (session == null || session.size() == 0) {
+					// 비로그인 상태
+					isGoing = showDefaultMenu();
+				} else if (session.containsKey(ADMIN_ID)) {
+					// 관리자 상태
+					isGoing = showAdminMenu();
+				} else {
+					// 일반 유저 상태
+					isGoing = showUserMenu();
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("숫자만 입력 가능합니다.");
+				sc.nextLine();
 			}
 		}
 
