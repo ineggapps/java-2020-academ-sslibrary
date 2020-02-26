@@ -4,15 +4,24 @@ import java.util.Date;
 
 public class BookManageVO {
 	private BookVO book;
+	private UserVO user;
 	private Date startDate;
 	private Date endDate;
-
+	
 	public BookVO getBook() {
 		return book;
 	}
 
 	public void setBook(BookVO book) {
 		this.book = book;
+	}
+
+	public UserVO getUser() {
+		return user;
+	}
+
+	public void setUser(UserVO user) {
+		this.user = user;
 	}
 
 	public Date getStartDate() {
@@ -36,8 +45,9 @@ public class BookManageVO {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookManageVO(BookVO book, Date startDate, Date endDate) {
+	public BookManageVO(BookVO book, UserVO user, Date startDate, Date endDate) {
 		this.book = book;
+		this.user = user;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
