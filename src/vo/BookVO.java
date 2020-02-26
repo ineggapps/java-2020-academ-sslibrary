@@ -9,7 +9,7 @@ public class BookVO {
 	private String publisher; // 출판사명
 	private Date releaseDate;// 출시일 (20011010 형식으로 저장)
 	private String amount; // 재고 (대여 시 모자라는지 판별하는 변수)
-	private String synopsis; // 줄거리 요약
+	private String field; // 분야
 
 	public String getISBN13() {
 		return ISBN13;
@@ -59,18 +59,18 @@ public class BookVO {
 		this.amount = amount;
 	}
 
-	public String getSynopsis() {
-		return synopsis;
+	public String getField() {
+		return field;
 	}
 
-	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
+	public void setField(String field) {
+		this.field = field;
 	}
 
 	@Override
 	public String toString() {
 		return "[title=" + title + ", author=" + author + ", publisher=" + publisher + ", ISBN13=" + ISBN13
-				+ ", releaseDate=" + releaseDate + ", amount=" + amount + ", synopsis=" + synopsis + "]";
+				+ ", releaseDate=" + releaseDate + ", amount=" + amount + ", field=" + field + "]";
 	}
 
 	/**
@@ -80,17 +80,17 @@ public class BookVO {
 	 * @param publisher
 	 * @param releaseDate
 	 * @param amount
-	 * @param synopsis
+	 * @param field
 	 */
 	public BookVO(String iSBN13, String title, String author, String publisher, Date releaseDate, String amount,
-			String synopsis) {
+			String field) {
 		ISBN13 = iSBN13;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
 		this.releaseDate = releaseDate;
 		this.amount = amount;
-		this.synopsis = synopsis;
+		this.field = field;
 	}
 
 	/**
