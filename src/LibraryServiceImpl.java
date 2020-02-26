@@ -69,7 +69,7 @@ public class LibraryServiceImpl implements LibraryService {
 		System.out.println(id + ", " + pw);
 		if (id.equals(ADMIN_ID) && pw.equals(ADMIN_PW)) {
 			System.out.println("관리자로 로그인하셨습니다!");
-			session.put(ADMIN_ID, new UserVO(ADMIN_ID, ADMIN_PW, "관리자"));
+			session.put(ADMIN_ID, new UserVO(ADMIN_ID, ADMIN_PW, ""));
 			return;
 		}
 
@@ -158,23 +158,23 @@ public class LibraryServiceImpl implements LibraryService {
 	public LibraryServiceImpl() {
 		List<UserVO> list = LibraryStorage.getInstance().getUserList();
 		// 더미데이터 완성시키기
-		list.add(new UserVO("history1", "0000", "전한길"));
-		list.add(new UserVO("history2", "0000", "설민석"));
-		list.add(new UserVO("history3", "0000", "강민성"));
-		list.add(new UserVO("history4", "0000", "문동균"));
-		list.add(new UserVO("history5", "0000", "신영식"));
-		list.add(new UserVO("history6", "0000", "고종훈"));
-		list.add(new UserVO("history7", "0000", "신명섭"));
-		list.add(new UserVO("korean1", "1111", "이선재"));
-		list.add(new UserVO("korean2", "1111", "김병태"));
-		list.add(new UserVO("korean3", "1111", "고혜원"));
-		list.add(new UserVO("korean4", "1111", "이태종"));
-		list.add(new UserVO("english1", "2222", "이동기"));
-		list.add(new UserVO("english2", "2222", "심우철"));
-		list.add(new UserVO("english3", "2222", "조태정"));
-		list.add(new UserVO("english4", "2222", "손진숙"));
-		list.add(new UserVO("english5", "2222", "김기훈"));
-		list.add(new UserVO("computer", "3333", "박미진"));
+		list.add(new UserVO("history1", "0000", "전한길", "hangil@gmail.com"));
+		list.add(new UserVO("history2", "0000", "설민석", "minseok@gmail.com"));
+		list.add(new UserVO("history3", "0000", "강민성", "minseong@gmail.com"));
+		list.add(new UserVO("history4", "0000", "문동균", "dong-gyun@gmail.com"));
+		list.add(new UserVO("history5", "0000", "신영식", "yeongsik@gmail.com"));
+		list.add(new UserVO("history6", "0000", "고종훈", "jonghoon@gmail.com"));
+		list.add(new UserVO("history7", "0000", "신명섭", "myungseob@gmail.com"));
+		list.add(new UserVO("korean1", "1111", "이선재", "seonjae@gmail.com"));
+		list.add(new UserVO("korean2", "1111", "김병태", "byeongtae@gmail.com"));
+		list.add(new UserVO("korean3", "1111", "고혜원", "hyaewon@gmail.com"));
+		list.add(new UserVO("korean4", "1111", "이태종", "taejong@gmail.com"));
+		list.add(new UserVO("english1", "2222", "이동기", "dong-gi@gmail.com"));
+		list.add(new UserVO("english2", "2222", "심우철", "woocheol@gmail.com"));
+		list.add(new UserVO("english3", "2222", "조태정", "taejeong@gmail.com"));
+		list.add(new UserVO("english4", "2222", "손진숙", "jinsuk@gmail.com"));
+		list.add(new UserVO("english5", "2222", "김기훈", "gihun@gmail.com"));
+		list.add(new UserVO("computer", "3333", "박미진", "mijin@gmail.com"));
 	}
 
 }
