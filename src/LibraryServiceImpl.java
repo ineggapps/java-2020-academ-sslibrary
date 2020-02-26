@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 import dao.UserViewer;
 import dao.UserViewerImpl;
-import db.LibraryStorage;
+import single.LibraryStorage;
+import single.Services;
 import vo.UserVO;
 
 public class LibraryServiceImpl implements LibraryService {
 
 	Scanner sc = new Scanner(System.in);
-	UserViewer uv = new UserViewerImpl();
+	UserViewer uv = Services.getInstance().getUserViewer();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
 
 	public void entrance() {
