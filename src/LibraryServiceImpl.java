@@ -54,7 +54,7 @@ public class LibraryServiceImpl implements LibraryService {
 			login();
 			break;
 		case 2:// 회원가입
-			register();
+			User
 			break;
 		}
 		return true;

@@ -57,7 +57,7 @@ public class UserManageImpl implements UserManage{
 	@Override
 	public void login() {
 		System.out.println("\n===로그인===");
-		Map<String, UserVO> session = LibraryStorage.getInstance().getSession();
+		UserVO loginMember = LibraryStorage.getInstance().getLoginMember();
 		String id;
 		String pw;
 
@@ -69,7 +69,7 @@ public class UserManageImpl implements UserManage{
 		System.out.println(id + ", " + pw);
 		if (id.equals(ADMIN_ID) && pw.equals(ADMIN_PW)) {
 			System.out.println("관리자로 로그인하셨습니다!");
-			session.put(ADMIN_ID, new UserVO(ADMIN_ID, ADMIN_PW, ""));
+			LibraryStorage.getInstance().setLoginMember(new UserVO(ADMIN_ID, ADMIN_PW, "관리자"));
 			return;
 		}
 
@@ -83,13 +83,13 @@ public class UserManageImpl implements UserManage{
 			return;
 		}
 
-		session.put(id, vo);
+		LibraryStorage.getInstance().setLoginMember(vo);
 		System.out.println("로그인하셨습니다.");
 	}
 
 	@Override
 	public void logout() {
-		LibraryStorage.getInstance().getSession().clear();
+		LibraryStorage.getInstance().setLoginMember(null);
 		System.out.println("안전하게 로그아웃 되었습니다.");
 	}
 	
