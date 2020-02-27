@@ -40,14 +40,16 @@ public class BookManageVO {
 		this.endDate = endDate;
 	}
 
+
 	/**
-	 * @param book
+	 * @param isbn13
+	 * @param id
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookManageVO(BookVO book, UserVO user, Date startDate, Date endDate) {
-		this.book = book;
-		this.user = user;
+	public BookManageVO(String isbn13, String id, Date startDate, Date endDate) {
+		this.isbn13 = isbn13;
+		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
