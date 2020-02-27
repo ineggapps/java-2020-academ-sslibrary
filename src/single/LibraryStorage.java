@@ -62,6 +62,10 @@ public class LibraryStorage {
 	public List<BookManageVO> getRentalList() {
 		return rentalList;
 	}
+	
+	public BookVO getBook(BookManageVO vo) {
+		return bookList.get(vo.getIsbn13());
+	}
 
 	// static ÁßÃ¸ Å¬·¡½º
 	private static class Holder {

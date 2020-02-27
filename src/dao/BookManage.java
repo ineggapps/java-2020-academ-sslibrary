@@ -1,9 +1,5 @@
 package dao;
 
-import java.util.List;
-
-import vo.BookVO;
-
 public interface BookManage {
 
 	public void insertBook();

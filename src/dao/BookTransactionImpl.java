@@ -40,7 +40,7 @@ public class BookTransactionImpl implements BookTransaction {
 		String code;
 		UserVO user = getUser();
 
-		System.out.println("대여 ?\n");
+		System.out.println("대여할 책 목록을 골라주세요\n");
 
 		System.out.println("대여할 책코드 ?");
 		code = sc.next();
@@ -64,11 +64,16 @@ public class BookTransactionImpl implements BookTransaction {
 	public BookManageVO returnBook() {
 		String endDateStr;
 		Date endDate;
-		System.out.println("반납?");
-		String code;
-		System.out.println("반납할 책코드 ?");
-		code = sc.next();
+		System.out.println("==========반납==========");
 
+		UserVO vo = getUser();
+		BookState bs = Services.getInstance().getBookState();
+		System.out.println(vo);
+		bs.findId(vo.getId());
+		
+		System.out.println("반납할 책코드 ?");
+		String code = sc.next();
+		
 		System.out.println("반납일 입력(2020-02-27)");
 		endDateStr = sc.next();
 		endDate = dm.toDate(endDateStr);
@@ -98,10 +103,10 @@ public class BookTransactionImpl implements BookTransaction {
 			String isbn = vo.getIsbn13();
 			String id = vo.getId();
 			if (isbn.equals(code) && id.equals(user.getId())) {
-				//삭제 연산
-				book.setAmount(book.getAmount()+1);//수량 원복
+				// 삭제 연산
+				book.setAmount(book.getAmount() + 1);// 수량 원복
 				vo.setEndDate(endDate);
-				//안내 문구 출력
+				// 안내 문구 출력
 				System.out.printf("%s님께서 빌려가신 %s 책이 %s부로 반납 처리되었습니다.", name, bookTitle, dm.toString(endDate));
 				System.out.println();
 				return vo;
