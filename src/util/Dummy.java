@@ -74,7 +74,7 @@ public class Dummy {
 	private void randomRental(List<BookManageVO> rentalList) {
 		rentalList.add(new BookManageVO("9791160509762", "history1", dm.toDate("20200207"), null));
 		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
-		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791189584542", "history1", dm.toDate("20200207"), null));
 		rentalList.add(new BookManageVO("9791160509762", "history2", dm.toDate("20200207"), dm.toDate("20200214")));
 		rentalList.add(new BookManageVO("9791162242551", "history2", dm.toDate("20200207"), dm.toDate("20200214")));
 		rentalList.add(new BookManageVO("9791189584542", "history2", dm.toDate("20200207"), dm.toDate("20200214")));
