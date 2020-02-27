@@ -1,11 +1,12 @@
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import dao.BookManage;
 import dao.BookState;
 import dao.BookStateImpl;
+import dao.BookManage;
 import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
@@ -26,23 +27,23 @@ public class LibraryServiceImpl implements LibraryService {
 	BookStateImpl bsi = new BookStateImpl();
 
 	public void entrance() {
-		// ·Î±×ÀÎ »óÅÂ¿¡ µû¶ó ¸Ş´º ´Ù¸£°Ô ±¸¼ºÇÏ±â
+		// ë¡œê·¸ì¸ ìƒíƒœì— ë”°ë¼ ë©”ë‰´ ë‹¤ë¥´ê²Œ êµ¬ì„±í•˜ê¸°
 		boolean isGoing = true;
 		while (isGoing) {
-			UserVO loginMember = LibraryStorage.getInstance().getLoginMember();
 			try {
+				UserVO loginMember = LibraryStorage.getInstance().getLoginMember();
 				if (loginMember == null) {
-					// ºñ·Î±×ÀÎ »óÅÂ
+					// ë¹„ë¡œê·¸ì¸ ìƒíƒœ
 					isGoing = showDefaultMenu();
 				} else if (loginMember.getId().equals(ADMIN_ID)) {
-					// °ü¸®ÀÚ »óÅÂ
+					// ê´€ë¦¬ì ìƒíƒœ
 					isGoing = showAdminMenu();
 				} else {
-					// ÀÏ¹İ À¯Àú »óÅÂ
+					// ì¼ë°˜ ìœ ì € ìƒíƒœ
 					isGoing = showUserMenu();
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("¼ıÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+				System.out.println("ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 				sc.nextLine();
 			}
 		}
@@ -53,18 +54,18 @@ public class LibraryServiceImpl implements LibraryService {
 	public boolean showDefaultMenu() {
 		int ch;
 		do {
-			System.out.println("¢Ë¢Ë¢Ë ½Ö¿ë µµ¼­°ü¿¡ ¿À½Å°É È¯¿µÇÕ´Ï´Ù.¢Ë¢Ë¢Ë");
-			System.out.print("1.·Î±×ÀÎ 2.È¸¿ø°¡ÀÔ 3.Á¾·á > ");
+			System.out.println("â–¦â–¦â–¦ ìŒìš© ë„ì„œê´€ì— ì˜¤ì‹ ê±¸ í™˜ì˜í•©ë‹ˆë‹¤.â–¦â–¦â–¦");
+			System.out.print("1.ë¡œê·¸ì¸ 2.íšŒì›ê°€ì… 3.ì¢…ë£Œ > ");
 			ch = sc.nextInt();
 		} while (ch < 1 || ch > 3);
 		if (ch == 3) {
 			return false;
 		}
 		switch (ch) {
-		case 1:// ·Î±×ÀÎ
+		case 1:// ë¡œê·¸ì¸
 			um.login();
 			break;
-		case 2:// È¸¿ø°¡ÀÔ
+		case 2:// íšŒì›ê°€ì…
 			um.join();
 			break;
 		}
@@ -77,38 +78,39 @@ public class LibraryServiceImpl implements LibraryService {
 
 	public boolean showAdminMenu() {
 		int ch;
-		System.out.println("\n===°ü¸®ÀÚ ¸Ş´º===");
-		System.out.print("1.µµ¼­°ü¸® 2.È¸¿ø°ü¸® 3.·Î±×¾Æ¿ô > ");
+		System.out.println("\n===ê´€ë¦¬ì ë©”ë‰´===");
+		System.out.print("1.ë„ì„œê´€ë¦¬ 2.íšŒì›ê´€ë¦¬ 3.ë¡œê·¸ì•„ì›ƒ > ");
 		ch = sc.nextInt();
 		switch (ch) {
-		case 1:bsi.borrowList();// µµ¼­°ü¸®
-				// ÀÓ½Ã ÄÚµå
+		case 1:bsi.borrowList();// ë„ì„œê´€ë¦¬
+				// ì„ì‹œ ì½”ë“œ
 //			Map<String, BookVO> books = LibraryStorage.getInstance().getBookList();
 //			Set<String> isbn13Set = books.keySet();
-//			System.out.println("=== µµ¼­°ü º¸°üÁßÀÎ ¼­Àû ¸ñ·Ï === ÃÑ " + isbn13Set.size() + "°Ç");
+//			System.out.println("=== ë„ì„œê´€ ë³´ê´€ì¤‘ì¸ ì„œì  ëª©ë¡ === ì´ " + isbn13Set.size() + "ê±´");
 //			Iterator<String> it = isbn13Set.iterator();
 //			while (it.hasNext()) {
 //				String isbn = it.next();
 //				System.out.println(books.get(isbn));
 //			}
-			
+			bs.findId();
+
 			break;
-		case 2:// È¸¿ø°ü¸®
-			System.out.print("1.È¸¿ø¸ñ·Ï 2.¾ÆÀÌµğ°Ë»ö 3.ÀÌÀü¸Ş´º > ");
+		case 2:// íšŒì›ê´€ë¦¬
+			System.out.print("1.íšŒì›ëª©ë¡ 2.ì•„ì´ë””ê²€ìƒ‰ 3.ì´ì „ë©”ë‰´ > ");
 			ch = sc.nextInt();
 			switch (ch) {
-			case 1:// È¸¿ø¸ñ·Ï
+			case 1:// íšŒì›ëª©ë¡
 				uv.printUsers();
 				break;
-			case 2:// ¾ÆÀÌµğ °Ë»ö
+			case 2:// ì•„ì´ë”” ê²€ìƒ‰
 				uv.findUserById();
 				break;
 			}
 			break;
-		case 3:// ·Î±×¾Æ¿ô
+		case 3:// ë¡œê·¸ì•„ì›ƒ
 			um.logout();
 			break;
-		case 4:// ÀÌÀü ¸Ş´º·Î
+		case 4:// ì´ì „ ë©”ë‰´ë¡œ
 			return false;
 		}
 		return true;
@@ -116,26 +118,26 @@ public class LibraryServiceImpl implements LibraryService {
 
 	@Override
 	public boolean showUserMenu() {
-		System.out.println("\n>>> ¿øÇÏ½Ã´Â ¸Ş´º¸¦ °í¸£½Ã¿À <<<");
+		System.out.println("\n>>> ì›í•˜ì‹œëŠ” ë©”ë‰´ë¥¼ ê³ ë¥´ì‹œì˜¤ <<<");
 		int ch;
-		System.out.println("\n===»ç¿ëÀÚ ¸Ş´º===");
-		System.out.print("1.µµ¼­´ë¿© 2.µµ¼­°Ë»ö 3.·Î±×¾Æ¿ô 4.Á¤º¸¼öÁ¤ 5.Å»Åğ 6.ÀÌÀü¸Ş´º");
+		System.out.println("\n===ì‚¬ìš©ì ë©”ë‰´===");
+		System.out.print("1.ë„ì„œëŒ€ì—¬ 2.ë„ì„œê²€ìƒ‰ 3.ë¡œê·¸ì•„ì›ƒ 4.ì •ë³´ìˆ˜ì • 5.íƒˆí‡´ 6.ì´ì „ë©”ë‰´");
 		ch = sc.nextInt();
 		switch (ch) {
-		case 1:// µµ¼­´ë¿©
+		case 1:// ë„ì„œëŒ€ì—¬
 			break;
-		case 2:// µµ¼­°Ë»ö
+		case 2:// ë„ì„œê²€ìƒ‰
 			break;
-		case 3:// ·Î±×¾Æ¿ô
+		case 3:// ë¡œê·¸ì•„ì›ƒ
 			um.logout();
 			break;
 		case 4:
 			um.update();
-			break; // Á¤º¸¼öÁ¤
+			break; // ì •ë³´ìˆ˜ì •
 		case 5:
-			um.out();// Å»Åğ
+			um.out();// íƒˆí‡´
 			break;
-		case 6: // ÀÌÀü ¸Ş´º·Î
+		case 6: // ì´ì „ ë©”ë‰´ë¡œ
 			return false;
 		}
 		return true;
@@ -143,49 +145,49 @@ public class LibraryServiceImpl implements LibraryService {
 
 	public LibraryServiceImpl() {
 		List<UserVO> list = LibraryStorage.getInstance().getUserList();
-		// ´õ¹Ìµ¥ÀÌÅÍ ¿Ï¼º½ÃÅ°±â
-		list.add(new UserVO("history1", "0000", "ÀüÇÑ±æ", "hangil@gmail.com"));
-		list.add(new UserVO("history2", "0000", "¼³¹Î¼®", "minseok@gmail.com"));
-		list.add(new UserVO("history3", "0000", "°­¹Î¼º", "minseong@gmail.com"));
-		list.add(new UserVO("history4", "0000", "¹®µ¿±Õ", "dong-gyun@gmail.com"));
-		list.add(new UserVO("history5", "0000", "½Å¿µ½Ä", "yeongsik@gmail.com"));
-		list.add(new UserVO("history6", "0000", "°íÁ¾ÈÆ", "jonghoon@gmail.com"));
-		list.add(new UserVO("history7", "0000", "½Å¸í¼·", "myungseob@gmail.com"));
-		list.add(new UserVO("korean1", "1111", "ÀÌ¼±Àç", "seonjae@gmail.com"));
-		list.add(new UserVO("korean2", "1111", "±èº´ÅÂ", "byeongtae@gmail.com"));
-		list.add(new UserVO("korean3", "1111", "°íÇı¿ø", "hyaewon@gmail.com"));
-		list.add(new UserVO("korean4", "1111", "ÀÌÅÂÁ¾", "taejong@gmail.com"));
-		list.add(new UserVO("english1", "2222", "ÀÌµ¿±â", "dong-gi@gmail.com"));
-		list.add(new UserVO("english2", "2222", "½É¿ìÃ¶", "woocheol@gmail.com"));
-		list.add(new UserVO("english3", "2222", "Á¶ÅÂÁ¤", "taejeong@gmail.com"));
-		list.add(new UserVO("english4", "2222", "¼ÕÁø¼÷", "jinsuk@gmail.com"));
+		// ë”ë¯¸ë°ì´í„° ì™„ì„±ì‹œí‚¤ê¸°
+		list.add(new UserVO("history1", "0000", "ì „í•œê¸¸", "hangil@gmail.com"));
+		list.add(new UserVO("history2", "0000", "ì„¤ë¯¼ì„", "minseok@gmail.com"));
+		list.add(new UserVO("history3", "0000", "ê°•ë¯¼ì„±", "minseong@gmail.com"));
+		list.add(new UserVO("history4", "0000", "ë¬¸ë™ê· ", "dong-gyun@gmail.com"));
+		list.add(new UserVO("history5", "0000", "ì‹ ì˜ì‹", "yeongsik@gmail.com"));
+		list.add(new UserVO("history6", "0000", "ê³ ì¢…í›ˆ", "jonghoon@gmail.com"));
+		list.add(new UserVO("history7", "0000", "ì‹ ëª…ì„­", "myungseob@gmail.com"));
+		list.add(new UserVO("korean1", "1111", "ì´ì„ ì¬", "seonjae@gmail.com"));
+		list.add(new UserVO("korean2", "1111", "ê¹€ë³‘íƒœ", "byeongtae@gmail.com"));
+		list.add(new UserVO("korean3", "1111", "ê³ í˜œì›", "hyaewon@gmail.com"));
+		list.add(new UserVO("korean4", "1111", "ì´íƒœì¢…", "taejong@gmail.com"));
+		list.add(new UserVO("english1", "2222", "ì´ë™ê¸°", "dong-gi@gmail.com"));
+		list.add(new UserVO("english2", "2222", "ì‹¬ìš°ì² ", "woocheol@gmail.com"));
+		list.add(new UserVO("english3", "2222", "ì¡°íƒœì •", "taejeong@gmail.com"));
+		list.add(new UserVO("english4", "2222", "ì†ì§„ìˆ™", "jinsuk@gmail.com"));
 
-		list.add(new UserVO("english5", "2222", "±è±âÈÆ", "gihun@gmail.com"));
-		list.add(new UserVO("computer", "3333", "¹Ú¹ÌÁø", "mijin@gmail.com"));
+		list.add(new UserVO("english5", "2222", "ê¹€ê¸°í›ˆ", "gihun@gmail.com"));
+		list.add(new UserVO("computer", "3333", "ë°•ë¯¸ì§„", "mijin@gmail.com"));
 
 		DateMaker dm = new DateMaker();
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
-		bookList.put("9788934900115", new BookVO("9788934900115", "Áö´ÉÀÇ ÇÔÁ¤", "µ¥ÀÌºñµå ·Ó½¼ Àú/ÀÌÃ¢½Å ¿ª", "±è¿µ»ç",
-				dm.toDate("20200113"), randomNumber(), "ÀÎ¹®"));
-		bookList.put("9791189995539", new BookVO("9791189995539", "¿ì¸®°¡ ÀÎ»ıÀÌ¶ó ºÎ¸£´Â °Íµé", "Á¤ÀçÂù Àú", "ÀÎÇÃ·ç¿£¼È",
-				dm.toDate("20200225"), randomNumber(), "ÀÎ¹®"));
-		bookList.put("9791189584559", new BookVO("9791189584559", "Á×Àº Ã¶ÇĞÀÚÀÇ »ì¾ÆÀÖ´Â ÀÎ»ı¼ö¾÷", "½Ã¶óÅä¸® ÇÏ·çÈ÷ÄÚ, ÁöÁö¿£Áî Àú/±èÁöÀ± ¿ª",
-				"Æ÷·¹½ºÆ®ºÏ½º", dm.toDate("20200306"), randomNumber(), "ÀÎ¹®"));
-		bookList.put("9791162242551", new BookVO("9791162242551", "°³¹ß 7³âÂ÷, ¸Å´ÏÀú 1ÀÏÂ÷", "Ä«¹ÌÀ¯ Çª¸£´Ï¿¡/±Ç¿ø»ó, ÇÑ¹ÎÁÖ ¿ª", "ÇÑºû¹Ìµğ¾î",
-				dm.toDate("20200204"), randomNumber(), "IT ¸ğ¹ÙÀÏ"));
-		bookList.put("9791160509762", new BookVO("9791160509762", "2020 ½Ã³ª°ø Á¤º¸Ã³¸®±â»ç ÇÊ±â", "±æ¹ş¾Ë¾Øµğ Àú", "±æ¹ş",
-				dm.toDate("20191118"), randomNumber(), "ÄÄÇ»ÅÍ ¼öÇè¼­"));
-		bookList.put("9788952753946", new BookVO("9788952753946", "³¯¾¾°¡ ÁÁÀ¸¸é Ã£¾Æ°¡°Ú¾î¿ä", "ÀÌµµ¿ì Àú", "½Ã°ø»ç",
-				dm.toDate("20200201"), randomNumber(), "¼Ò¼³/½Ã/Èñ°î"));
-		bookList.put("9788936434267", new BookVO("9788936434267", "³¯¾¾°¡ ÁÁÀ¸¸é Ã£¾Æ°¡°Ú¾î¿ä", "¼Õ¿øÆò Àú", "Ã¢ºñ",
-				dm.toDate("20170331"), randomNumber(), "¼Ò¼³/½Ã/Èñ°î"));
+		bookList.put("9788934900115", new BookVO("9788934900115", "ì§€ëŠ¥ì˜ í•¨ì •", "ë°ì´ë¹„ë“œ ë¡­ìŠ¨ ì €/ì´ì°½ì‹  ì—­", "ê¹€ì˜ì‚¬",
+				dm.toDate("20200113"), randomNumber(), "ì¸ë¬¸"));
+		bookList.put("9791189995539", new BookVO("9791189995539", "ìš°ë¦¬ê°€ ì¸ìƒì´ë¼ ë¶€ë¥´ëŠ” ê²ƒë“¤", "ì •ì¬ì°¬ ì €", "ì¸í”Œë£¨ì—”ì…œ",
+				dm.toDate("20200225"), randomNumber(), "ì¸ë¬¸"));
+		bookList.put("9791189584559", new BookVO("9791189584559", "ì£½ì€ ì² í•™ìì˜ ì‚´ì•„ìˆëŠ” ì¸ìƒìˆ˜ì—…", "ì‹œë¼í† ë¦¬ í•˜ë£¨íˆì½”, ì§€ì§€ì—”ì¦ˆ ì €/ê¹€ì§€ìœ¤ ì—­",
+				"í¬ë ˆìŠ¤íŠ¸ë¶ìŠ¤", dm.toDate("20200306"), randomNumber(), "ì¸ë¬¸"));
+		bookList.put("9791162242551", new BookVO("9791162242551", "ê°œë°œ 7ë…„ì°¨, ë§¤ë‹ˆì € 1ì¼ì°¨", "ì¹´ë¯¸ìœ  í‘¸ë¥´ë‹ˆì—/ê¶Œì›ìƒ, í•œë¯¼ì£¼ ì—­", "í•œë¹›ë¯¸ë””ì–´",
+				dm.toDate("20200204"), randomNumber(), "IT ëª¨ë°”ì¼"));
+		bookList.put("9791160509762", new BookVO("9791160509762", "2020 ì‹œë‚˜ê³µ ì •ë³´ì²˜ë¦¬ê¸°ì‚¬ í•„ê¸°", "ê¸¸ë²—ì•Œì•¤ë”” ì €", "ê¸¸ë²—",
+				dm.toDate("20191118"), randomNumber(), "ì»´í“¨í„° ìˆ˜í—˜ì„œ"));
+		bookList.put("9788952753946", new BookVO("9788952753946", "ë‚ ì”¨ê°€ ì¢‹ìœ¼ë©´ ì°¾ì•„ê°€ê² ì–´ìš”", "ì´ë„ìš° ì €", "ì‹œê³µì‚¬",
+				dm.toDate("20200201"), randomNumber(), "ì†Œì„¤/ì‹œ/í¬ê³¡"));
+		bookList.put("9788936434267", new BookVO("9788936434267", "ë‚ ì”¨ê°€ ì¢‹ìœ¼ë©´ ì°¾ì•„ê°€ê² ì–´ìš”", "ì†ì›í‰ ì €", "ì°½ë¹„",
+				dm.toDate("20170331"), randomNumber(), "ì†Œì„¤/ì‹œ/í¬ê³¡"));
 
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
-		rentalList.add(new BookManageVO("9791160509762","history1",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791160509762","history2",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791160509762","history3",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791160509762", "history1", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791160509762", "history2", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791160509762", "history3", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
 	}
 
 	public int randomNumber() {
