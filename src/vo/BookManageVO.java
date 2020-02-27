@@ -64,7 +64,9 @@ public class BookManageVO {
 
 	@Override
 	public String toString() {
-		return "[" + isbn13 + ", " + id + ", " + dm.toString(startDate) + ", " + dm.toString(endDate) + "]";
+		String start = dm.toString(startDate);
+		String end = endDate!=null?dm.toString(endDate):"ing";
+		return "[" + isbn13 + ", " + id + ", " + start+ " ~ " + end + "]";
 	}
 
 }
