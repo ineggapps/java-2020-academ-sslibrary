@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import single.LibraryStorage;
+import single.Services;
 import vo.BookManageVO;
 import vo.UserVO;
 
@@ -146,12 +147,17 @@ public class UserManageImpl implements UserManage {
 		BookManageVO bmv = LibraryStorage.getInstance().getBorrowUser(id);
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
 		List<BookManageVO> removeList = new ArrayList<>();
+		//강제 반납 대상 책 목록
 		for (BookManageVO bm : rentalList) {
 			if (bm.getId().equals(id)) {
 				removeList.add(bm);
 			}
 		}
+		//반납하기
+		//반납 후 대여일지에서 해당 회원목록을 삭제
+		BookTransaction bt = Services.getInstance().getBookTransaction();
 		for (BookManageVO bm : removeList) {
+			bt.returnBook(bm);
 			rentalList.remove(bm);
 		}
 

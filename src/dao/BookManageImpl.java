@@ -3,7 +3,6 @@ package dao;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -146,7 +145,6 @@ public class BookManageImpl implements BookManage {
 		System.out.print("검색할 도서명? ");
 		title = sc.next();
 
-		DateMaker dm = new DateMaker();
 		Iterator<String> it = bookList.keySet().iterator();
 		System.out.println("ISBN,제목,저자,출판사,출판일,수량,분야");
 		while (it.hasNext()) {

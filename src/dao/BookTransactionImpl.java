@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import single.LibraryStorage;
+import single.Services;
 import util.DateMaker;
 import vo.BookManageVO;
 import vo.BookVO;
@@ -16,6 +17,7 @@ import vo.UserVO;
 public class BookTransactionImpl implements BookTransaction {
 	private List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
 	private Scanner sc = new Scanner(System.in);
+	private DateMaker dm = new DateMaker();
 
 //로그인했는지 확인
 	private UserVO getUser() {
@@ -60,7 +62,6 @@ public class BookTransactionImpl implements BookTransaction {
 //반납
 	@Override
 	public BookManageVO returnBook() {
-		UserVO user = getUser();
 		String endDateStr;
 		Date endDate;
 		System.out.println("반납?");
@@ -70,20 +71,39 @@ public class BookTransactionImpl implements BookTransaction {
 
 		System.out.println("반납일 입력(2020-02-27)");
 		endDateStr = sc.next();
-
-		DateMaker dm = new DateMaker();
 		endDate = dm.toDate(endDateStr);
+
+		return returnBook(code, endDate);
+	}
+
+	@Override
+	public BookManageVO returnBook(BookManageVO vo) {
+		return returnBook(vo.getIsbn13(), new Date());
+	}
+
+	@Override
+	public BookManageVO returnBook(String code, Date endDate) {
+		UserVO user = getUser();
+		String name = user.getName();
 
 		if (endDate == null) {
 			System.out.println("유효하지 않은 날짜 정보를 입력하셨습니다.");
 			return null;
 		}
 
+		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		for (BookManageVO vo : rentalList) {
+			BookVO book = bookList.get(vo.getIsbn13());
+			String bookTitle = book.getTitle();
 			String isbn = vo.getIsbn13();
 			String id = vo.getId();
 			if (isbn.equals(code) && id.equals(user.getId())) {
+				//삭제 연산
+				book.setAmount(book.getAmount()+1);//수량 원복
 				vo.setEndDate(endDate);
+				//안내 문구 출력
+				System.out.printf("%s님께서 빌려가신 %s 책이 %s부로 반납 처리되었습니다.", name, bookTitle, dm.toString(endDate));
+				System.out.println();
 				return vo;
 			}
 		}

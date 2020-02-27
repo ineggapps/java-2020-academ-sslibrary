@@ -55,7 +55,6 @@ public class Services {
 		return bookTransaction;
 	}
 
-
 	private static class Holder {
 		public static final Services INSTANCE = new Services();
 	}

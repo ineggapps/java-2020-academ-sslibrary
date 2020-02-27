@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 import dao.BookManage;
 import dao.BookState;
-import dao.BookStateImpl;
 import dao.BookTransaction;
-import dao.BookTransactionImpl;
 import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
@@ -26,6 +24,7 @@ public class LibraryServiceImpl implements LibraryService {
 	UserViewer uv = Services.getInstance().getUserViewer();
 	UserManage um = Services.getInstance().getUserManage();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
+	DateMaker dm = new DateMaker();
 
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -142,7 +141,7 @@ public class LibraryServiceImpl implements LibraryService {
 			System.out.print("1.전체 검색 2.도서명 검색 3.ISBN 검색 4.이전 메뉴> ");
 			ch = sc.nextInt();
 			switch (ch) {
-			case 1://전체 목록
+			case 1:// 전체 목록
 				bm.listBook();
 				break;
 			case 2:// 도서명 검색
@@ -192,7 +191,6 @@ public class LibraryServiceImpl implements LibraryService {
 		list.add(new UserVO("english5", "2222", "김기훈", "gihun@gmail.com"));
 		list.add(new UserVO("computer", "3333", "박미진", "mijin@gmail.com"));
 
-		DateMaker dm = new DateMaker();
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		bookList.put("9788934900115", new BookVO("9788934900115", "지능의 함정", "데이비드 롭슨 저/이창신 역", "김영사",
 				dm.toDate("20200113"), randomNumber(), "인문"));
