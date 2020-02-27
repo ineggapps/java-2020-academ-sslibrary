@@ -10,7 +10,6 @@ import vo.UserVO;
 
 public class UserManageImpl implements UserManage{
 	private Scanner sc = new Scanner(System.in);
-	private Map<String, UserVO> map = new HashMap<>();
 	
 	@Override
 	public void join() {
@@ -18,17 +17,19 @@ public class UserManageImpl implements UserManage{
 		// id(키), pw, name, email
 		// id(키) 중복체크
 		
+		UserVO vo = new UserVO();
 		String id;
 		System.out.print("아이디 입력 >");
 		id = sc.next();
+		vo.setId(id);
 		
-		if(map.containsKey(id)) {
+		
+		if(LibraryStorage.getInstance().getUser(id)!=null) {
 			System.out.println("등록된 아이디 입니다 ㅠㅠ. \n");
 			return;
 		}
 		
 		try {
-			UserVO vo = new UserVO();
 			
 			System.out.print("이름 입력 >");
 			vo.setName(sc.next());
@@ -44,7 +45,7 @@ public class UserManageImpl implements UserManage{
 			System.out.print("이메일 입력 >");
 			vo.setEmail(sc.next());
 			
-			map.put(id, vo);
+			LibraryStorage.getInstance().getUserList().add(vo);
 			System.out.println("축> 회원가입이 완료 되었습니다. <하");
 			
 			
