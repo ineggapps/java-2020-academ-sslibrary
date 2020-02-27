@@ -2,6 +2,8 @@ package vo;
 
 import java.util.Date;
 
+import util.DateMaker;
+
 public class BookVO {
 	private String ISBN13; // ISBN 13
 	private String title;// 책 제목
@@ -10,6 +12,7 @@ public class BookVO {
 	private Date releaseDate;// 출시일 (20011010 형식으로 저장)
 	private int amount; // 재고 (대여 시 모자라는지 판별하는 변수)
 	private String field; // 분야
+	private DateMaker dm = new DateMaker();
 
 	public String getISBN13() {
 		return ISBN13;
@@ -69,8 +72,9 @@ public class BookVO {
 
 	@Override
 	public String toString() {
+		String date = dm.toString(releaseDate);
 		return "[title=" + title + ", author=" + author + ", publisher=" + publisher + ", ISBN13=" + ISBN13
-				+ ", releaseDate=" + releaseDate + ", amount=" + amount + ", field=" + field + "]";
+				+ ", releaseDate=" + date + ", amount=" + amount + ", field=" + field + "]";
 	}
 
 	/**
