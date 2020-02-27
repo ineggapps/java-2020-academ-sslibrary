@@ -11,7 +11,7 @@ public interface BookManage {
 	public void deleteBook();
 	public void findByISBN();
 	public void findByTitle();
-	public List<BookVO> listBook();
+	public void listBook();
 	
 	
 	

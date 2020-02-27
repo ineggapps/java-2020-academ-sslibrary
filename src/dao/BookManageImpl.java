@@ -36,7 +36,7 @@ public class BookManageImpl implements BookManage {
 			vo.setPublisher(sc.next());
 			System.out.print("출시일 ? ");
 			Date releaseDate = dm.toDate(sc.next());
-			if(releaseDate==null) {
+			if (releaseDate == null) {
 				throw new Exception("날짜가 올바르지 않습니다. 2020-02-27 형식으로 입력해 주세요.");
 			}
 			vo.setReleaseDate(releaseDate);
@@ -47,13 +47,12 @@ public class BookManageImpl implements BookManage {
 
 			bookList.put(isbn, vo);
 			System.out.println("등록완료....\n");
-		}catch(InputMismatchException e) {
+		} catch (InputMismatchException e) {
 			System.out.println("등록 실패: 숫자만 입력해 주시기 바랍니다.");
 			sc.nextLine();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 //			e.printStackTrace();
-			System.out.println("등록 실패: "+e.getMessage());
+			System.out.println("등록 실패: " + e.getMessage());
 			sc.nextLine();
 		}
 	}
@@ -128,12 +127,13 @@ public class BookManageImpl implements BookManage {
 			return;
 		}
 
-		System.out.print(vo.getIsbn13() + "\t");
-		System.out.print(vo.getTitle() + "\t");
-		System.out.print(vo.getAuthor() + "\t");
-		System.out.print(vo.getPublisher() + "\t");
-		System.out.print(vo.getReleaseDate() + "\t");
-		System.out.print(vo.getAmount() + "\t");
+		System.out.println("ISBN,제목,저자,출판사,출판일,수량,분야");
+		System.out.print(vo.getIsbn13() + " | ");
+		System.out.print(vo.getTitle() + " | ");
+		System.out.print(vo.getAuthor() + " | ");
+		System.out.print(vo.getPublisher() + " | ");
+		System.out.print(vo.getReleaseDate() + " | ");
+		System.out.print(vo.getAmount() + " | ");
 		System.out.print(vo.getField() + "\n");
 		System.out.println();
 	}
@@ -146,18 +146,19 @@ public class BookManageImpl implements BookManage {
 		System.out.print("검색할 도서명? ");
 		title = sc.next();
 
+		DateMaker dm = new DateMaker();
 		Iterator<String> it = bookList.keySet().iterator();
+		System.out.println("ISBN,제목,저자,출판사,출판일,수량,분야");
 		while (it.hasNext()) {
 			String isbn = it.next();
 			BookVO vo = bookList.get(isbn);
-
 			if (vo.getTitle().indexOf(title) >= 0) {
-				System.out.print(vo.getIsbn13() + "\t");
-				System.out.print(vo.getTitle() + "\t");
-				System.out.print(vo.getAuthor() + "\t");
-				System.out.print(vo.getPublisher() + "\t");
-				System.out.print(vo.getReleaseDate() + "\t");
-				System.out.print(vo.getAmount() + "\t");
+				System.out.print(vo.getIsbn13() + " | ");
+				System.out.print(vo.getTitle() + " | ");
+				System.out.print(vo.getAuthor() + " | ");
+				System.out.print(vo.getPublisher() + " | ");
+				System.out.print(dm.toString(vo.getReleaseDate()) + " | ");
+				System.out.print(vo.getAmount() + " | ");
 				System.out.print(vo.getField() + "\n");
 			}
 		}
@@ -177,7 +178,7 @@ public class BookManageImpl implements BookManage {
 	}
 
 	@Override
-	public List<BookVO> listBook() {
+	public void listBook() {
 		System.out.println("\n등록된 도서 목록...");
 		System.out.println("등록된 도서 : " + bookList.size() + " 종");
 		BookVO vo = null;
@@ -185,9 +186,9 @@ public class BookManageImpl implements BookManage {
 		while (it.hasNext()) {
 			String key = it.next();
 			vo = bookList.get(key);
-			System.out.println(key + ":" + vo);
+			System.out.println(vo);
+//			System.out.println(key + ":" + vo);
 		}
 		System.out.println();
-		return null;
 	}
 }
