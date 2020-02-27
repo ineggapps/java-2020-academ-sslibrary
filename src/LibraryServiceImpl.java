@@ -166,8 +166,7 @@ public class LibraryServiceImpl implements LibraryService {
 		case 3:// 로그아웃
 			logout();
 			break;
-		case 4:// 정보수정
-			break;
+		case 4:um.update();break; //정보수정
 		case 5:// 탈퇴
 			break;
 		case 6: // 이전 메뉴로
