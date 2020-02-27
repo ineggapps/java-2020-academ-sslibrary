@@ -8,7 +8,7 @@ public class BookVO {
 	private String author;// 글쓴이
 	private String publisher; // 출판사명
 	private Date releaseDate;// 출시일 (20011010 형식으로 저장)
-	private String amount; // 재고 (대여 시 모자라는지 판별하는 변수)
+	private int amount; // 재고 (대여 시 모자라는지 판별하는 변수)
 	private String field; // 분야
 
 	public String getISBN13() {
@@ -51,11 +51,11 @@ public class BookVO {
 		this.releaseDate = releaseDate;
 	}
 
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
@@ -82,7 +82,7 @@ public class BookVO {
 	 * @param amount
 	 * @param field
 	 */
-	public BookVO(String iSBN13, String title, String author, String publisher, Date releaseDate, String amount,
+	public BookVO(String iSBN13, String title, String author, String publisher, Date releaseDate, int amount,
 			String field) {
 		ISBN13 = iSBN13;
 		this.title = title;
