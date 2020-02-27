@@ -60,4 +60,11 @@ public class BookManageVO {
 	public BookManageVO() {
 	}
 
+	@Override
+	public String toString() {
+		return "[isbn13=" + isbn13 + ", id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+	}
+	
+	
+
 }
