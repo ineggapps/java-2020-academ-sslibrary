@@ -78,7 +78,7 @@ public class LibraryServiceImpl implements LibraryService {
 		ch = sc.nextInt();
 		switch (ch) {
 		case 1:
-			System.out.print("1.도서목록조회 2. 도서등록 3.도서수정 4.도서삭제 5.도서검색 6. 대여목록조회 7. 이전메뉴 > ");
+			System.out.print("1.도서목록조회 2. 도서등록 3.도서수정 4.도서삭제 5.도서검색 6.대여목록조회 7.이전메뉴 > ");
 			ch = sc.nextInt();
 			switch (ch) {
 			case 1:// 도서목록조회

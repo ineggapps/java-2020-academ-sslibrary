@@ -11,7 +11,7 @@ import vo.UserVO;
 public class BookStateImpl implements BookState {
 	Scanner sc = new Scanner(System.in);
 	private List<BookManageVO> list = LibraryStorage.getInstance().getRentalList();
-
+	
 	public void BookState(BookManageVO vo) {
 		list.add(vo);
 	}
@@ -22,8 +22,11 @@ public class BookStateImpl implements BookState {
 	public void allList() {
 		// 대여 했거나 대여 중인 도서 목록 전체	
 		System.out.println("대여 중인 도서 목록");
+		LibraryStorage ls = LibraryStorage.getInstance();
 		for (BookManageVO vo : list) {
-				System.out.println(vo);
+			UserVO user = ls.getUser(vo.getId());
+			System.out.println(vo);
+			System.out.println("\t└" + user);
 		}
 	}
 
@@ -32,9 +35,12 @@ public class BookStateImpl implements BookState {
 	@Override
 	public void borrowList() {
 		System.out.println("대여 중인 도서 목록");
+		LibraryStorage ls = LibraryStorage.getInstance();
 		for (BookManageVO vo : list) {
+			UserVO user = ls.getUser(vo.getId());
 			if (vo.getEndDate() == null) {
 				System.out.println(vo);
+				System.out.println("\t└"+user);
 			}
 		}
 
@@ -43,9 +49,12 @@ public class BookStateImpl implements BookState {
 	@Override
 	public void returnList() {
 		System.out.println("도서 반납 목록");
+		LibraryStorage ls = LibraryStorage.getInstance();
 		for (BookManageVO vo : list) {
+			UserVO user = ls.getUser(vo.getId());
 			if (vo.getEndDate() != null) {
 				System.out.println(vo);
+				System.out.println("\t└"+user);
 			}
 		}
 
