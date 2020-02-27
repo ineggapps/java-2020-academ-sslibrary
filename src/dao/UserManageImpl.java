@@ -112,11 +112,11 @@ public class UserManageImpl implements UserManage{
 		
 		UserVO vo = LibraryStorage.getInstance().getUser(id);
 		
-		System.out.println(vo.toStringWithPassword());
 		if(vo==null || ! vo.getPw().equals(pw) || ! vo.getId().equals(id) ) {
 			System.out.println("아이디와 비밀번호가 일치 하지 않아요 ㅠㅠ...\n");
 			return;
 		}
+		System.out.println(vo.toStringWithPassword());
 		
 		
 		System.out.print("수정할 비밀번호 >");
