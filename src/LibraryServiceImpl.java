@@ -1,24 +1,26 @@
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
-import dao.UserManageImpl;
+import dao.BookState;
+import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
 import single.Services;
 import util.DateMaker;
+import vo.BookManageVO;
 import vo.BookVO;
 import vo.UserVO;
 
 public class LibraryServiceImpl implements LibraryService {
 
 	Scanner sc = new Scanner(System.in);
+	BookManager bm = Services.getInstance().getBookManage();
+	BookState bs = Services.getInstance().getBookState();
 	UserViewer uv = Services.getInstance().getUserViewer();
+	UserManage um = Services.getInstance().getUserManage();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
-	UserManageImpl um = new UserManageImpl();
 
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -66,52 +68,6 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 
 	@Override
-	public void login() {
-		System.out.println("\n===로그인===");
-		UserVO loginMember = LibraryStorage.getInstance().getLoginMember();
-		String id;
-		String pw;
-
-		System.out.print("아이디 입력 ? ");
-		id = sc.next();
-		System.out.print("비밀번호 입력 ? ");
-		pw = sc.next();
-
-		System.out.println(id + ", " + pw);
-		if (id.equals(ADMIN_ID) && pw.equals(ADMIN_PW)) {
-			System.out.println("관리자로 로그인하셨습니다!");
-			LibraryStorage.getInstance().setLoginMember(new UserVO(ADMIN_ID, ADMIN_PW, "관리자"));
-			return;
-		}
-
-		// 일반 유저 로그인
-		UserVO vo = LibraryStorage.getInstance().getUser(id);
-		if (vo == null) {
-			System.out.println("존재하지 않는 계정입니다.");
-			return;
-		} else if (!pw.equals(vo.getPw())) {
-			System.out.println("비밀번호가 틀렸습니다.");
-			return;
-		}
-
-		LibraryStorage.getInstance().setLoginMember(vo);
-		System.out.println("로그인하셨습니다.");
-	}
-
-	@Override
-	public void logout() {
-		LibraryStorage.getInstance().setLoginMember(null);
-		System.out.println("안전하게 로그아웃 되었습니다.");
-	}
-
-	@Override
-	public void register() {
-		System.out.println("\n===회원가입===");
-		// join() 실행
-		System.out.println("회원가입 완료!");
-	}
-
-	@Override
 	public boolean showAdminMenu() {
 		int ch;
 		System.out.println("\n===관리자 메뉴===");
@@ -120,14 +76,15 @@ public class LibraryServiceImpl implements LibraryService {
 		switch (ch) {
 		case 1:// 도서관리
 				// 임시 코드
-			Map<String, BookVO> books = LibraryStorage.getInstance().getBookList();
-			Set<String> isbn13Set = books.keySet();
-			System.out.println("=== 도서관 보관중인 서적 목록 === 총 " + isbn13Set.size() + "건");
-			Iterator<String> it = isbn13Set.iterator();
-			while (it.hasNext()) {
-				String isbn = it.next();
-				System.out.println(books.get(isbn));
-			}
+//			Map<String, BookVO> books = LibraryStorage.getInstance().getBookList();
+//			Set<String> isbn13Set = books.keySet();
+//			System.out.println("=== 도서관 보관중인 서적 목록 === 총 " + isbn13Set.size() + "건");
+//			Iterator<String> it = isbn13Set.iterator();
+//			while (it.hasNext()) {
+//				String isbn = it.next();
+//				System.out.println(books.get(isbn));
+//			}
+			
 			break;
 		case 2:// 회원관리
 			System.out.print("1.회원목록 2.아이디검색 3.이전메뉴 > ");
@@ -142,7 +99,7 @@ public class LibraryServiceImpl implements LibraryService {
 			}
 			break;
 		case 3:// 로그아웃
-			logout();
+			um.logout();
 			break;
 		case 4:// 이전 메뉴로
 			return false;
@@ -163,10 +120,13 @@ public class LibraryServiceImpl implements LibraryService {
 		case 2:// 도서검색
 			break;
 		case 3:// 로그아웃
-			logout();
+			um.logout();
 			break;
-		case 4:um.update();break; //정보수정
-		case 5:um.out();// 탈퇴
+		case 4:
+			um.update();
+			break; // 정보수정
+		case 5:
+			um.out();// 탈퇴
 			break;
 		case 6: // 이전 메뉴로
 			return false;
@@ -213,6 +173,12 @@ public class LibraryServiceImpl implements LibraryService {
 		bookList.put("9788936434267", new BookVO("9788936434267", "날씨가 좋으면 찾아가겠어요", "손원평 저", "창비",
 				dm.toDate("20170331"), randomNumber(), "소설/시/희곡"));
 
+		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
+		rentalList.add(new BookManageVO("9791160509762","history1",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791160509762","history2",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791160509762","history3",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
 	}
 
 	public int randomNumber() {
