@@ -27,16 +27,22 @@ public class Dummy {
 		list.add(new UserVO("history5", "0000", "신영식", "yeongsik@gmail.com"));
 		list.add(new UserVO("history6", "0000", "고종훈", "jonghoon@gmail.com"));
 		list.add(new UserVO("history7", "0000", "신명섭", "myungseob@gmail.com"));
-		list.add(new UserVO("korean1", "1111", "이선재", "seonjae@gmail.com"));
-		list.add(new UserVO("korean2", "1111", "김병태", "byeongtae@gmail.com"));
-		list.add(new UserVO("korean3", "1111", "고혜원", "hyaewon@gmail.com"));
-		list.add(new UserVO("korean4", "1111", "이태종", "taejong@gmail.com"));
-		list.add(new UserVO("english1", "2222", "이동기", "dong-gi@gmail.com"));
-		list.add(new UserVO("english2", "2222", "심우철", "woocheol@gmail.com"));
-		list.add(new UserVO("english3", "2222", "조태정", "taejeong@gmail.com"));
-		list.add(new UserVO("english4", "2222", "손진숙", "jinsuk@gmail.com"));
-		list.add(new UserVO("english5", "2222", "김기훈", "gihun@gmail.com"));
-		list.add(new UserVO("computer", "3333", "박미진", "mijin@gmail.com"));
+		list.add(new UserVO("korean1", "0000", "이선재", "seonjae@gmail.com"));
+		list.add(new UserVO("korean2", "0000", "김병태", "byeongtae@gmail.com"));
+		list.add(new UserVO("korean3", "0000", "고혜원", "hyaewon@gmail.com"));
+		list.add(new UserVO("korean4", "0000", "이태종", "taejong@gmail.com"));
+		list.add(new UserVO("english1", "0000", "이동기", "dong-gi@gmail.com"));
+		list.add(new UserVO("english2", "0000", "심우철", "woocheol@gmail.com"));
+		list.add(new UserVO("english3", "0000", "조태정", "taejeong@gmail.com"));
+		list.add(new UserVO("english4", "0000", "손진숙", "jinsuk@gmail.com"));
+		list.add(new UserVO("english5", "0000", "김기훈", "gihun@gmail.com"));
+		list.add(new UserVO("computer", "0000", "박미진", "mijin@gmail.com"));
+		list.add(new UserVO("math1", "0000", "정승제", "jsj@gmail.com"));
+		list.add(new UserVO("math2", "0000", "이미지", "img@gmail.com"));
+		list.add(new UserVO("math3", "0000", "이장규", "ijg@gmail.com"));
+		list.add(new UserVO("math4", "0000", "정현경", "jhg@gmail.com"));
+		list.add(new UserVO("math5", "0000", "차상현", "csh@gmail.com"));
+		list.add(new UserVO("math6", "0000", "한재후", "hjh@gmail.com"));
 	}
 
 	private void randomBook(Map<String, BookVO> bookList) {
