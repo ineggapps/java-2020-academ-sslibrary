@@ -6,14 +6,14 @@ JAVA 조별과제 도서관 프로그램
 
 ### [관리자 - 사서]
 
-- [ ] 대여,반납 리스트 출력 -은지 (BookState, BookStateImpl)
-- [ ] 도서 추가, 수정, 삭제, 검색(코드,도서명) -다혜 (BookManage, BookManageImpl)
+- [x] 대여,반납 리스트 출력 -은지 (BookState, BookStateImpl)
+- [x] 도서 추가, 수정, 삭제, 검색(코드,도서명) -다혜 (BookManage, BookManageImpl)
 - [x] 회원 관리(회원리스트, 아이디검색)-호중 (UserViewer, UserViewerImpl)
 
 ### [사용자 -도서관 이용]
 
-- [ ] 회원가입, 로그아웃,사용자 정보수정, 탈퇴-선화 (UserManage, UserManageImpl)
-- [ ] 책 검색(관리자의 도서명 검색 기능), 대여, 반납-미주 (BookTransaction, BookTransactionImpl)
+- [x] 회원가입, 로그아웃,사용자 정보수정, 탈퇴-선화 (UserManage, UserManageImpl)
+- [x] 책 검색(관리자의 도서명 검색 기능), 대여, 반납-미주 (BookTransaction, BookTransactionImpl)
 
 ### 데이터 저장
 
