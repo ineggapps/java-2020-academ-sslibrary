@@ -7,4 +7,5 @@ public interface BookState {
 	public void borrowList();
 	public void returnList();
 	public void findId(); 
+	public void findId(String id);
 }
