@@ -10,7 +10,6 @@ import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
 import single.Services;
-import util.DateMaker;
 import util.Dummy;
 import vo.BookManageVO;
 import vo.BookVO;
@@ -84,6 +83,7 @@ public class LibraryServiceImpl implements LibraryService {
 			switch (ch) {
 			case 1:// 도서목록조회
 				bm.listBook();
+				break;
 			case 2:// 도서등록
 				bm.insertBook();
 				break;
@@ -125,9 +125,6 @@ public class LibraryServiceImpl implements LibraryService {
 					System.out.println("ERR: 잘못 입력하셨습니다.");
 					break;
 				}
-				break;
-			case 7:
-				bm.listBook();
 				break;
 			}
 			break;
