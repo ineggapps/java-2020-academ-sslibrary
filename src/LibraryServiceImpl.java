@@ -6,6 +6,8 @@ import java.util.Scanner;
 import dao.BookManage;
 import dao.BookState;
 import dao.BookStateImpl;
+import dao.BookTransaction;
+import dao.BookTransactionImpl;
 import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
@@ -20,10 +22,10 @@ public class LibraryServiceImpl implements LibraryService {
 	Scanner sc = new Scanner(System.in);
 	BookManage bm = Services.getInstance().getBookManage();
 	BookState bs = Services.getInstance().getBookState();
+	BookTransaction bt = Services.getInstance().getBookTransaction();
 	UserViewer uv = Services.getInstance().getUserViewer();
 	UserManage um = Services.getInstance().getUserManage();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
-	BookStateImpl bsi = new BookStateImpl();
 
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -127,23 +129,42 @@ public class LibraryServiceImpl implements LibraryService {
 		System.out.println("\n===원하시는 메뉴를 고르시오===");
 		int ch;
 		System.out.println("\n===사용자 메뉴===");
-		System.out.print("1.도서대여 2.도서검색 3.로그아웃 4.정보수정 5.탈퇴 6.이전메뉴");
+		System.out.print("1.도서대여 2.도서반납 3.도서검색 4.로그아웃 5.정보수정 6.탈퇴 7.이전메뉴 > ");
 		ch = sc.nextInt();
 		switch (ch) {
 		case 1:// 도서대여
+			bt.rentalBook();
 			break;
-		case 2:// 도서검색
+		case 2:// 도서반납
+			bt.returnBook();
 			break;
-		case 3:// 로그아웃
+		case 3:// 도서검색
+			System.out.print("1.전체 검색 2.도서명 검색 3.ISBN 검색 4.이전 메뉴> ");
+			ch = sc.nextInt();
+			switch (ch) {
+			case 1://전체 목록
+				bm.listBook();
+				break;
+			case 2:// 도서명 검색
+				bm.findByTitle();
+				break;
+			case 3:// 도서코드 검색
+				bm.findByISBN();
+				break;
+			default:
+				System.out.println("잘못 선택하셨습니다.");
+			}
+			break;
+		case 4:// 로그아웃
 			um.logout();
 			break;
-		case 4:
+		case 5:
 			um.update();
 			break; // 정보수정
-		case 5:
+		case 6:
 			um.out();// 탈퇴
 			break;
-		case 6: // 이전 메뉴로
+		case 7: // 이전 메뉴로
 			return false;
 		}
 		return true;
