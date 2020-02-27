@@ -44,7 +44,9 @@ public class UserManageImpl implements UserManage {
 			System.out.print("이메일 입력 >");
 			vo.setEmail(sc.next());
 
-			LibraryStorage.getInstance().getUserList().add(vo);
+			LibraryStorage ls = LibraryStorage.getInstance();
+			ls.getUserList().add(vo);//유저 추가
+			ls.sortByUserName();//정렬 호출
 			System.out.println("축> 회원가입이 완료 되었습니다. <하");
 
 		} catch (Exception e) {
