@@ -2,12 +2,15 @@ package vo;
 
 import java.util.Date;
 
+import util.DateMaker;
+
 public class BookManageVO {
-	private String isbn13;//대여한 책 코드 정보
-	private String id;//대여한 사용자 ID정보
-	private Date startDate;//대여일
-	private Date endDate;//반납일
-	
+	private String isbn13;// 대여한 책 코드 정보
+	private String id;// 대여한 사용자 ID정보
+	private Date startDate;// 대여일
+	private Date endDate;// 반납일
+	private DateMaker dm = new DateMaker();
+
 	public String getIsbn13() {
 		return isbn13;
 	}
@@ -40,7 +43,6 @@ public class BookManageVO {
 		this.endDate = endDate;
 	}
 
-
 	/**
 	 * @param isbn13
 	 * @param id
@@ -62,9 +64,7 @@ public class BookManageVO {
 
 	@Override
 	public String toString() {
-		return "[isbn13=" + isbn13 + ", id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+		return "[" + isbn13 + ", " + id + ", " + dm.toString(startDate) + ", " + dm.toString(endDate) + "]";
 	}
-	
-	
 
 }

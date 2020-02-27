@@ -72,9 +72,8 @@ public class BookVO {
 
 	@Override
 	public String toString() {
-		String date = dm.toString(releaseDate);
-		return "[title=" + title + ", author=" + author + ", publisher=" + publisher + ", ISBN13=" + isbn13
-				+ ", releaseDate=" + date + ", amount=" + amount + ", field=" + field + "]";
+		return "[" + isbn13 + ", " + title + ", " + author + ", " + publisher + ", " + dm.toString(releaseDate) + ", "
+				+ amount + ", " + field + "]";
 	}
 
 	/**

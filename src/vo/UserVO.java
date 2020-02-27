@@ -43,11 +43,11 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", email=" + email + ", name=" + name + "]";
+		return "[" + id + ", " + name + ", " + email + "]";
 	}
 
 	public String toStringWithPassword() {
-		return "[id=" + id + ", pw=" + pw + ", email=" + email + ", name=" + name + "]";
+		return "[" + id + ", " + pw + ", " + name + ", " + email + "]";
 	}
 
 	/**
