@@ -1,13 +1,11 @@
 package dao;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import single.LibraryStorage;
 import vo.BookManageVO;
-import vo.BookVO;
 import vo.UserVO;
 
 public class UserManageImpl implements UserManage {
@@ -144,16 +142,19 @@ public class UserManageImpl implements UserManage {
 			return;
 		}
 
-		
 		LibraryStorage.getInstance().getUserList().remove(vo);
-		BookManageVO bmv  = LibraryStorage.getInstance().getBorrowUser(id);
+		BookManageVO bmv = LibraryStorage.getInstance().getBorrowUser(id);
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
-		for(int i=0; i<rentalList.size();i++) {
-			if(rentalList.get(i).getId().equals(id)) {
-				rentalList.remove(i);
+		List<BookManageVO> removeList = new ArrayList<>();
+		for (BookManageVO bm : rentalList) {
+			if (bm.getId().equals(id)) {
+				removeList.add(bm);
 			}
 		}
-		
+		for (BookManageVO bm : removeList) {
+			rentalList.remove(bm);
+		}
+
 		System.out.println(vo.getName() + " È¸¿ø´Ô Å»Åð°¡ µÇ¼Ì½À´Ï´Ù...\n");
 		logout();
 	}
