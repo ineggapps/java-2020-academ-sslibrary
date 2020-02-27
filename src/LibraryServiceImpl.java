@@ -203,9 +203,7 @@ public class LibraryServiceImpl implements LibraryService {
 		bookList.put("9791160509762", new BookVO("9791160509762", "2020 시나공 정보처리기사 필기", "길벗알앤디 저", "길벗",
 				dm.toDate("20191118"), randomNumber(), "컴퓨터 수험서"));
 		bookList.put("9788952753946", new BookVO("9788952753946", "날씨가 좋으면 찾아가겠어요", "이도우 저", "시공사",
-				dm.toDate("20200201"), randomNumber(), "소설/시/희곡"));
-		bookList.put("9788936434267", new BookVO("9788936434267", "날씨가 좋으면 찾아가겠어요", "손원평 저", "창비",
-				dm.toDate("20170331"), randomNumber(), "소설/시/희곡"));
+				dm.toDate("20200201"), 0, "소설/시/희곡"));
 
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
 		rentalList.add(new BookManageVO("9791160509762", "history1", dm.toDate("20200207"), null));

@@ -37,20 +37,30 @@ public class BookTransactionImpl implements BookTransaction {
 //대여
 	@Override
 	public BookManageVO rentalBook() {
+		BookManage bm = Services.getInstance().getBookManage();
 		String code;
 		UserVO user = getUser();
 
 		System.out.println("대여할 책 목록을 골라주세요\n");
+		bm.listBook();
 
 		System.out.println("대여할 책코드 ?");
 		code = sc.next();
 
 		BookVO vo = readBook(code);
 		if (vo == null) {
-			System.out.println("대여가 완료되지않았습니다.\n");
+			System.out.println("올바르지 않은 코드를 입력하셨습니다.\n");
 			return null;
 		}
 		// LibraryStorage.getInstance().getBookList().remove(vo);
+
+		// 수량 파악
+		int amount = vo.getAmount() - 1;
+		if (amount < 0) {
+			System.out.println("현재 " + vo.getTitle() + "의 모든 책이 대출 중입니다. 반납되는 대로 추후 연락드리겠습니다.");
+			return null;
+		}
+		vo.setAmount(amount);
 
 		System.out.println("대여가 완료되었습니다. ");
 
@@ -62,18 +72,19 @@ public class BookTransactionImpl implements BookTransaction {
 //반납
 	@Override
 	public BookManageVO returnBook() {
+		BookState bs = Services.getInstance().getBookState();
+
 		String endDateStr;
 		Date endDate;
 		System.out.println("==========반납==========");
 
 		UserVO vo = getUser();
-		BookState bs = Services.getInstance().getBookState();
 		System.out.println(vo);
 		bs.findId(vo.getId());
-		
+
 		System.out.println("반납할 책코드 ?");
 		String code = sc.next();
-		
+
 		System.out.println("반납일 입력(2020-02-27)");
 		endDateStr = sc.next();
 		endDate = dm.toDate(endDateStr);
