@@ -3,25 +3,25 @@ package vo;
 import java.util.Date;
 
 public class BookManageVO {
-	private BookVO book;//대여한 책 정보
-	private UserVO user;//대여한 사용자 정보
+	private String isbn13;//대여한 책 코드 정보
+	private String id;//대여한 사용자 ID정보
 	private Date startDate;//대여일
 	private Date endDate;//반납일
 	
-	public BookVO getBook() {
-		return book;
+	public String getIsbn13() {
+		return isbn13;
 	}
 
-	public void setBook(BookVO book) {
-		this.book = book;
+	public void setIsbn13(String isbn13) {
+		this.isbn13 = isbn13;
 	}
 
-	public UserVO getUser() {
-		return user;
+	public String getId() {
+		return id;
 	}
 
-	public void setUser(UserVO user) {
-		this.user = user;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Date getStartDate() {

@@ -8,7 +8,6 @@ public class UserVO {
 	private String pw;// 비밀번호
 	private String name;// 회원명
 	private String email; // 이메일
-	private List<BookManageVO> list;// 대여 목록
 
 	public String getId() {
 		return id;
@@ -42,36 +41,33 @@ public class UserVO {
 		this.name = name;
 	}
 
-	public List<BookManageVO> getList() {
-		if (list == null) {
-			list = new ArrayList<BookManageVO>();
-		}
-		return list;
-	}
-
 	@Override
 	public String toString() {
-		return "[id=" + id + ", email=" + email + ", name=" + name + ", list=" + list + "]";
+		return "[id=" + id + ", email=" + email + ", name=" + name + "]";
 	}
 
 	public String toStringWithPassword() {
-		return "[id=" + id + ", pw=" + pw + ", email=" + email + ", name=" + name + ", list=" + list + "]";
+		return "[id=" + id + ", pw=" + pw + ", email=" + email + ", name=" + name + "]";
 	}
 
-	/** 더미데이터 삽입을 위한 생성자
+	/**
+	 * 더미데이터 삽입을 위한 생성자
+	 * 
 	 * @param id
 	 * @param pw
 	 * @param email
 	 * @param name
 	 */
-	public UserVO(String id, String pw,  String name,String email) {
+	public UserVO(String id, String pw, String name, String email) {
 		this.id = id;
 		this.pw = pw;
 		this.email = email;
 		this.name = name;
 	}
-	
-	/** 관리자 로그인 세션을 위한 생성자
+
+	/**
+	 * 관리자 로그인 세션을 위한 생성자
+	 * 
 	 * @param id
 	 * @param pw
 	 * @param name
