@@ -1,9 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-import dao.UserManageImpl;
+import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
 import single.Services;
@@ -14,7 +13,7 @@ public class LibraryServiceImpl implements LibraryService {
 	Scanner sc = new Scanner(System.in);
 	UserViewer uv = Services.getInstance().getUserViewer();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
-	UserManageImpl um = new UserManageImpl(); 
+	UserManage um = Services.getInstance().getUserManage();
 	
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -96,19 +95,6 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 
 	@Override
-	public void logout() {
-		LibraryStorage.getInstance().setLoginMember(null);
-		System.out.println("안전하게 로그아웃 되었습니다.");
-	}
-
-	@Override
-	public void register() {
-		System.out.println("\n===회원가입===");
-		//join() 실행 
-		System.out.println("회원가입 완료!");
-	}
-
-	@Override
 	public boolean showAdminMenu() {
 		int ch;
 		System.out.println("\n===관리자 메뉴===");
@@ -130,7 +116,7 @@ public class LibraryServiceImpl implements LibraryService {
 			}
 			break;
 		case 3:// 로그아웃
-			logout();
+			um.logout();
 			break;
 		case 4:// 이전 메뉴로
 			return false;
