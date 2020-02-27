@@ -48,6 +48,7 @@ public class LibraryServiceImpl implements LibraryService {
 	public boolean showDefaultMenu() {
 		int ch;
 		do {
+			System.out.println("▦▦▦ 쌍용 도서관에 오신걸 환영합니다.▦▦▦");
 			System.out.print("1.로그인 2.회원가입 3.종료 > ");
 			ch = sc.nextInt();
 		} while (ch < 1 || ch > 3);
@@ -72,9 +73,9 @@ public class LibraryServiceImpl implements LibraryService {
 		String id;
 		String pw;
 
-		System.out.print("아이디 입력 ? ");
+		System.out.print("아이디 > ");
 		id = sc.next();
-		System.out.print("비밀번호 입력 ? ");
+		System.out.print("비밀번호 > ");
 		pw = sc.next();
 
 		System.out.println(id + ", " + pw);
@@ -152,7 +153,7 @@ public class LibraryServiceImpl implements LibraryService {
 
 	@Override
 	public boolean showUserMenu() {
-		System.out.println("\n===원하시는 메뉴를 고르시오===");
+		System.out.println("\n>>> 원하시는 메뉴를 고르시오 <<<");
 		int ch;
 		System.out.println("\n===사용자 메뉴===");
 		System.out.print("1.도서대여 2.도서검색 3.로그아웃 4.정보수정 5.탈퇴 6.이전메뉴");
