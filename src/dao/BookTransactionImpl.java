@@ -44,7 +44,7 @@ public class BookTransactionImpl implements BookTransaction {
 		System.out.println("대여할 책 목록을 골라주세요\n");
 		bm.listBook();
 
-		System.out.println("대여할 책코드 ?");
+		System.out.print("대여할 책코드 ? ");
 		code = sc.next();
 
 		BookVO vo = readBook(code);
@@ -82,7 +82,7 @@ public class BookTransactionImpl implements BookTransaction {
 		System.out.println(vo);
 		bs.findId(vo.getId());
 
-		System.out.println("반납할 책코드 ?");
+		System.out.print("반납할 책코드 ? ");
 		String code = sc.next();
 
 		System.out.println("반납일 입력(2020-02-27)");

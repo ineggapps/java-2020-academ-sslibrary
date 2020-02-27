@@ -23,7 +23,7 @@ public class BookManageImpl implements BookManage {
 
 			BookVO vo = new BookVO();
 			String isbn;
-			System.out.println("등록할 도서의 ISBN(13자리)을 입력해주세요... ");
+			System.out.print("등록할 도서의 ISBN(13자리)을 입력해주세요... > ");
 			isbn = sc.next();
 			vo.setISBN13(isbn);
 
