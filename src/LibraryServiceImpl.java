@@ -59,7 +59,6 @@ public class LibraryServiceImpl implements LibraryService {
 			um.login();
 			break;
 		case 2:// 회원가입
-
 			um.join();
 			break;
 		}
@@ -167,7 +166,7 @@ public class LibraryServiceImpl implements LibraryService {
 			logout();
 			break;
 		case 4:um.update();break; //정보수정
-		case 5:// 탈퇴
+		case 5:um.out();// 탈퇴
 			break;
 		case 6: // 이전 메뉴로
 			return false;
