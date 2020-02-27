@@ -15,10 +15,15 @@ public class LibraryStorage {
 	}
 
 	// 현재 세션
-	private Map<String, UserVO> session = new HashMap<>();
+	private UserVO loginMember = null;
+	
 
-	public Map<String, UserVO> getSession() {
-		return session;
+	public UserVO getLoginMember() {
+		return loginMember;
+	}
+
+	public void setLoginMember(UserVO loginMember) {
+		this.loginMember = loginMember;
 	}
 
 	public UserVO getUser(String id) {//유저 검색하여 가져오기 없으면 null 반환
