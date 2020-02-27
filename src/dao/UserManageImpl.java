@@ -116,8 +116,6 @@ public class UserManageImpl implements UserManage{
 			System.out.println("아이디와 비밀번호가 일치 하지 않아요 ㅠㅠ...\n");
 			return;
 		}
-		System.out.println(vo.toStringWithPassword());
-		
 		
 		System.out.print("수정할 비밀번호 >");
 		vo.setPw(sc.next());
@@ -136,7 +134,24 @@ public class UserManageImpl implements UserManage{
 
 	@Override
 	public void out() {
-		// TODO Auto-generated method stub
+		String id;
+		String pw;
+		
+		System.out.print("아이디 입력 >");
+		id = sc.next();
+		
+		System.out.print("비밀 번호 입력 >");
+		pw = sc.next();
+		
+		UserVO vo = LibraryStorage.getInstance().getUser(id);
+		if(vo==null || ! vo.getPw().equals(pw) || ! vo.getId().equals(id) ) {
+			System.out.println("아이디와 비밀번호가 일치 하지 않아요 ㅠㅠ...\n");
+			return;
+		}
+		
+		LibraryStorage.getInstance().getUserList().remove(vo);
+		
+		System.out.println(vo.getName()+" 회원님 탈퇴가 되셨습니다...\n");
 		
 	}
 
