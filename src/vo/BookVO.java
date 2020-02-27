@@ -5,7 +5,7 @@ import java.util.Date;
 import util.DateMaker;
 
 public class BookVO {
-	private String ISBN13; // ISBN 13
+	private String isbn13; // ISBN 13
 	private String title;// 책 제목
 	private String author;// 글쓴이
 	private String publisher; // 출판사명
@@ -14,12 +14,12 @@ public class BookVO {
 	private String field; // 분야
 	private DateMaker dm = new DateMaker();
 
-	public String getISBN13() {
-		return ISBN13;
+	public String getIsbn13() {
+		return isbn13;
 	}
 
-	public void setISBN13(String iSBN13) {
-		ISBN13 = iSBN13;
+	public void setISBN13(String isbn13) {
+		this.isbn13 = isbn13;
 	}
 
 	public String getTitle() {
@@ -73,7 +73,7 @@ public class BookVO {
 	@Override
 	public String toString() {
 		String date = dm.toString(releaseDate);
-		return "[title=" + title + ", author=" + author + ", publisher=" + publisher + ", ISBN13=" + ISBN13
+		return "[title=" + title + ", author=" + author + ", publisher=" + publisher + ", ISBN13=" + isbn13
 				+ ", releaseDate=" + date + ", amount=" + amount + ", field=" + field + "]";
 	}
 
@@ -86,9 +86,9 @@ public class BookVO {
 	 * @param amount
 	 * @param field
 	 */
-	public BookVO(String iSBN13, String title, String author, String publisher, Date releaseDate, int amount,
+	public BookVO(String isbn13, String title, String author, String publisher, Date releaseDate, int amount,
 			String field) {
-		ISBN13 = iSBN13;
+		this.isbn13 = isbn13;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;

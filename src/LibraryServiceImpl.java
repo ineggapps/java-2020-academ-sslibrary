@@ -77,17 +77,29 @@ public class LibraryServiceImpl implements LibraryService {
 		System.out.print("1.도서관리 2.회원관리 3.로그아웃 > ");
 		ch = sc.nextInt();
 		switch (ch) {
-		case 1:bsi.borrowList();// 도서관리
-				// 임시 코드
-//			Map<String, BookVO> books = LibraryStorage.getInstance().getBookList();
-//			Set<String> isbn13Set = books.keySet();
-//			System.out.println("=== 도서관 보관중인 서적 목록 === 총 " + isbn13Set.size() + "건");
-//			Iterator<String> it = isbn13Set.iterator();
-//			while (it.hasNext()) {
-//				String isbn = it.next();
-//				System.out.println(books.get(isbn));
-//			}
-			
+		case 1:
+			System.out.print("1.도서등록 2.도서수정 3.도서삭제 4.ISBN으로검색 5.도서명으로검색 6.보유한도서리스트 7.종료=> ");
+			ch = sc.nextInt();
+			switch (ch) {
+			case 1:
+				bm.insertBook();
+				break;
+			case 2:
+				bm.updateBook();
+				break;
+			case 3:
+				bm.deleteBook();
+				break;
+			case 4:
+				bm.findByISBN();
+				break;
+			case 5:
+				bm.findByTitle();
+				break;
+			case 6:
+				bm.listBook();
+				break;
+			}
 			break;
 		case 2:// 회원관리
 			System.out.print("1.회원목록 2.아이디검색 3.이전메뉴 > ");
@@ -177,11 +189,11 @@ public class LibraryServiceImpl implements LibraryService {
 				dm.toDate("20170331"), randomNumber(), "소설/시/희곡"));
 
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
-		rentalList.add(new BookManageVO("9791160509762","history1",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791160509762","history2",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791160509762","history3",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
-		rentalList.add(new BookManageVO("9791189995539","history1",dm.toDate("20200207"),null));
+		rentalList.add(new BookManageVO("9791160509762", "history1", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791160509762", "history2", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791160509762", "history3", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
+		rentalList.add(new BookManageVO("9791189995539", "history1", dm.toDate("20200207"), null));
 	}
 
 	public int randomNumber() {

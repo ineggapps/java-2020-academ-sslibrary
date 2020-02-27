@@ -6,7 +6,7 @@ public class DateMaker {
 	public Date toDate(String strDate) {
 		Date date = null;
 		try {
-			strDate.replaceAll("(\\-|\\.|/)", "");
+			strDate = strDate.replaceAll("(\\-|\\.|/)", "");
 			if (strDate.length() != 8) {
 				return null;
 			}
