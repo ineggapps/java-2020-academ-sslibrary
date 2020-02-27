@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -95,15 +96,43 @@ public class UserManageImpl implements UserManage{
 	}
 	
 	
-	
-
-
-
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		System.out.println("회원님의 정보 수정...\n");
 		
+		String id;
+		String pw;
+		
+		System.out.println("=========본인 확인 ========");
+		System.out.print("아이디 입력>");
+		id = sc.next();
+		
+		System.out.print("비밀번호 입력>");
+		pw = sc.next();
+		
+		UserVO vo = LibraryStorage.getInstance().getUser(id);
+		
+		System.out.println(vo.toStringWithPassword());
+		if(vo==null || ! vo.getPw().equals(pw) || ! vo.getId().equals(id) ) {
+			System.out.println("아이디와 비밀번호가 일치 하지 않아요 ㅠㅠ...\n");
+			return;
+		}
+		
+		
+		System.out.print("수정할 비밀번호 >");
+		vo.setPw(sc.next());
+		
+		System.out.print("수정할 이름 >");
+		vo.setName(sc.next());
+		
+		System.out.print("수정할 이메일 >");
+		vo.setEmail(sc.next());
+		
+		System.out.println("수정된"+ vo.getName()+"님의 정보 : " + vo.toStringWithPassword());
+		System.out.println(vo.getName()+"님의 정보 수정이 완료 되었습니다.! \n");
 	}
+	
+	
 
 	@Override
 	public void out() {
