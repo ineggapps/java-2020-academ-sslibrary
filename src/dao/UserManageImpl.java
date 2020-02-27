@@ -163,8 +163,8 @@ public class UserManageImpl implements UserManage {
 			rentalList.remove(bm);
 		}
 
-		System.out.println(vo.getName() + " È¸¿ø´Ô Å»Åð°¡ µÇ¼Ì½À´Ï´Ù...\n");
 		logout();
+		System.out.println(vo.getName() + " È¸¿ø´Ô Å»Åð°¡ µÇ¼Ì½À´Ï´Ù...\n");
 	}
 
 }
