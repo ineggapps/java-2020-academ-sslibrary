@@ -88,10 +88,17 @@ public class UserManageImpl implements UserManage {
 		System.out.println("로그인하셨습니다.");
 	}
 
+	
 	@Override
 	public void logout() {
+		logout(false);
+	}
+	
+	public void logout(boolean isSilent) {
 		LibraryStorage.getInstance().setLoginMember(null);
-		System.out.println("안전하게 로그아웃 되었습니다.");
+		if(!isSilent) {
+			System.out.println("안전하게 로그아웃 되었습니다.");
+		}
 	}
 
 	@Override
@@ -146,7 +153,6 @@ public class UserManageImpl implements UserManage {
 		}
 
 		LibraryStorage.getInstance().getUserList().remove(vo);
-		BookManageVO bmv = LibraryStorage.getInstance().getBorrowUser(id);
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
 		List<BookManageVO> removeList = new ArrayList<>();
 		//강제 반납 대상 책 목록
@@ -163,7 +169,7 @@ public class UserManageImpl implements UserManage {
 			rentalList.remove(bm);
 		}
 
-		logout();
+		logout(true);
 		System.out.println(vo.getName() + " 회원님 탈퇴가 되셨습니다...\n");
 	}
 

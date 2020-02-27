@@ -8,6 +8,7 @@ public interface UserManage {
 	public void join();
 	public void login();
 	public void logout();
+	public void logout(boolean isSilent);
 	public void update();
 	public void out();
 	
