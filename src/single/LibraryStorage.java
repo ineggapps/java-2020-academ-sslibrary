@@ -22,7 +22,7 @@ public class LibraryStorage {
 		return loginMember;
 	}
 
-	public void setLoginMember(UserVO loginMember) {
+	public void setLoginMember(UserVO loginMember) {//¼öÁ¤
 		this.loginMember = loginMember;
 	}
 

@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import dao.UserManageImpl;
 import dao.UserViewer;
 import single.LibraryStorage;
 import single.Services;
@@ -13,7 +14,7 @@ public class LibraryServiceImpl implements LibraryService {
 	Scanner sc = new Scanner(System.in);
 	UserViewer uv = Services.getInstance().getUserViewer();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
-	
+	UserManageImpl um = new UserManageImpl(); 
 	
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -51,10 +52,11 @@ public class LibraryServiceImpl implements LibraryService {
 		}
 		switch (ch) {
 		case 1:// 로그인
-			login();
+			um.login();
 			break;
 		case 2:// 회원가입
-			User
+			
+			um.join();
 			break;
 		}
 		return true;
