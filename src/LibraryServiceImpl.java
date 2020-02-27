@@ -79,25 +79,54 @@ public class LibraryServiceImpl implements LibraryService {
 		ch = sc.nextInt();
 		switch (ch) {
 		case 1:
-			System.out.print("1.도서등록 2.도서수정 3.도서삭제 4.ISBN으로검색 5.도서명으로검색 6.보유한도서리스트 7.종료=> ");
+			System.out.print("1.도서목록조회 2. 도서등록 3.도서수정 4.도서삭제 5.도서검색 6. 대여목록조회 7. 이전메뉴 > ");
 			ch = sc.nextInt();
 			switch (ch) {
-			case 1:
+			case 1:// 도서목록조회
+				bm.listBook();
+			case 2:// 도서등록
 				bm.insertBook();
 				break;
-			case 2:
+			case 3:// 도서수정
 				bm.updateBook();
 				break;
-			case 3:
+			case 4:// 도서삭제
 				bm.deleteBook();
 				break;
-			case 4:
-				bm.findByISBN();
+			case 5:// 도서검색
+				System.out.print("1.ISBN검색 2.책제목 검색 > ");
+				ch = sc.nextInt();
+				switch (ch) {
+				case 1:// ISBN검색
+					bm.findByISBN();
+					break;
+				case 2:// 책 제목 검색
+					bm.findByTitle();
+					break;
+				default:
+					System.out.println("ERR: 잘못 입력하셨습니다.");
+					break;
+				}
 				break;
-			case 5:
-				bm.findByTitle();
+			case 6:// 대여목록 조회
+				System.out.print("1.미반납자 조회 2.반납된 도서조회 3.전체조회 > ");
+				ch = sc.nextInt();
+				switch (ch) {
+				case 1:
+					bs.borrowList();
+					break;
+				case 2:
+					bs.returnList();
+					break;
+				case 3:
+					bs.allList();
+					break;
+				default:
+					System.out.println("ERR: 잘못 입력하셨습니다.");
+					break;
+				}
 				break;
-			case 6:
+			case 7:
 				bm.listBook();
 				break;
 			}
@@ -170,14 +199,12 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 
 	public LibraryServiceImpl() {
-		//생성자 호출을 위한 객체참조변수 선언
+		// 생성자 호출을 위한 객체참조변수 선언
 		List<UserVO> userList = LibraryStorage.getInstance().getUserList();
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
-		//더미데이터 생성하기
+		// 더미데이터 생성하기
 		new Dummy(userList, bookList, rentalList);
 	}
-
-	
 
 }

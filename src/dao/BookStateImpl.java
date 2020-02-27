@@ -15,10 +15,23 @@ public class BookStateImpl implements BookState {
 	public void BookState(BookManageVO vo) {
 		list.add(vo);
 	}
+	
+	
+
+	@Override
+	public void allList() {
+		// 대여 했거나 대여 중인 도서 목록 전체	
+		System.out.println("대여 중인 도서 목록");
+		for (BookManageVO vo : list) {
+				System.out.println(vo);
+		}
+	}
+
+
 
 	@Override
 	public void borrowList() {
-		System.out.println("대여 도서 목록");
+		System.out.println("대여 중인 도서 목록");
 		for (BookManageVO vo : list) {
 			if (vo.getEndDate() == null) {
 				System.out.println(vo);
@@ -60,7 +73,7 @@ public class BookStateImpl implements BookState {
 				BookVO book = LibraryStorage.getInstance().getBook(vo);
 				if (vo.getId().equals(id)) {
 					System.out.println(vo);
-					System.out.println("\t└"+book);
+					System.out.println("\t└" + book);
 					exist = true;
 				}
 			}
