@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import dao.UserViewer;
-import dao.UserViewerImpl;
 import single.LibraryStorage;
 import single.Services;
 import vo.UserVO;
@@ -14,7 +13,8 @@ public class LibraryServiceImpl implements LibraryService {
 	Scanner sc = new Scanner(System.in);
 	UserViewer uv = Services.getInstance().getUserViewer();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
-
+	
+	
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
 		boolean isGoing = true;
@@ -102,7 +102,7 @@ public class LibraryServiceImpl implements LibraryService {
 	@Override
 	public void register() {
 		System.out.println("\n===회원가입===");
-
+		//join() 실행 
 		System.out.println("회원가입 완료!");
 	}
 
