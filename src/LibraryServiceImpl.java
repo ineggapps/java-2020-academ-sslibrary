@@ -3,7 +3,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import dao.BookManage;
 import dao.BookState;
+import dao.BookStateImpl;
 import dao.UserManage;
 import dao.UserViewer;
 import single.LibraryStorage;
@@ -16,11 +18,12 @@ import vo.UserVO;
 public class LibraryServiceImpl implements LibraryService {
 
 	Scanner sc = new Scanner(System.in);
-	BookManager bm = Services.getInstance().getBookManage();
+	BookManage bm = Services.getInstance().getBookManage();
 	BookState bs = Services.getInstance().getBookState();
 	UserViewer uv = Services.getInstance().getUserViewer();
 	UserManage um = Services.getInstance().getUserManage();
 	List<UserVO> userList = LibraryStorage.getInstance().getUserList();
+	BookStateImpl bsi = new BookStateImpl();
 
 	public void entrance() {
 		// 로그인 상태에 따라 메뉴 다르게 구성하기
@@ -74,7 +77,7 @@ public class LibraryServiceImpl implements LibraryService {
 		System.out.print("1.도서관리 2.회원관리 3.로그아웃 > ");
 		ch = sc.nextInt();
 		switch (ch) {
-		case 1:// 도서관리
+		case 1:bsi.borrowList();// 도서관리
 				// 임시 코드
 //			Map<String, BookVO> books = LibraryStorage.getInstance().getBookList();
 //			Set<String> isbn13Set = books.keySet();

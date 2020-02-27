@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import single.LibraryStorage;
+import vo.BookManageVO;
+import vo.BookVO;
 import vo.UserVO;
 
 public class UserManageImpl implements UserManage {
@@ -142,7 +144,16 @@ public class UserManageImpl implements UserManage {
 			return;
 		}
 
+		
 		LibraryStorage.getInstance().getUserList().remove(vo);
+		BookManageVO bmv  = LibraryStorage.getInstance().getBorrowUser(id);
+		List<BookManageVO> rentalList = LibraryStorage.getInstance().getRentalList();
+		for(int i=0; i<rentalList.size();i++) {
+			if(rentalList.get(i).getId().equals(id)) {
+				rentalList.remove(i);
+			}
+		}
+		
 		System.out.println(vo.getName() + " È¸¿ø´Ô Å»Åð°¡ µÇ¼Ì½À´Ï´Ù...\n");
 		logout();
 	}

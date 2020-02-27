@@ -34,6 +34,15 @@ public class LibraryStorage {
 		}
 		return null;
 	}
+	
+	public BookManageVO getBorrowUser(String id) {//유저 검색하여 가져오기 없으면 null 반환
+		for (BookManageVO bmv : rentalList) {
+			if (id.equals(bmv.getId())) {
+				return bmv;
+			}
+		}
+		return null;
+	}
 
 	// 회원 목록
 	private List<UserVO> userList = new ArrayList<>();
