@@ -164,8 +164,7 @@ public class BookTransactionImpl implements BookTransaction {
 					System.out.println(dm.toString(sday) + "보다 큰 날짜를 입력하세요.");
 					return null;
 				} else if (compare > 0) {
-					System.out.println(dm.toString(eday) + "까지 반납해주세요.");
-
+//					System.out.println(dm.toString(eday) + "까지 반납해주세요.");
 					if (isbn.equals(code) && id.equals(user.getId())) {
 						// 삭제 연산
 						book.setAmount(book.getAmount() + 1);// 수량 원복
