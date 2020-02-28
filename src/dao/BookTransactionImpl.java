@@ -138,6 +138,11 @@ public class BookTransactionImpl implements BookTransaction {
 
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		for (BookManageVO vo : rentalList) {
+			if(!vo.getIsbn13().equals(code)) {
+				//복수 개의 대출 중인 상황에서는 어떤 책을 반납할 것인가에 달렸다.
+				//대출 중이지만 반납하고자 하는 책이 아니라면 이번 요소 vo는 건너뛴다.
+				continue;
+			}
 			BookVO book = bookList.get(vo.getIsbn13());
 			String bookTitle = book.getTitle();
 			String isbn = vo.getIsbn13();
@@ -158,8 +163,8 @@ public class BookTransactionImpl implements BookTransaction {
 				eday = dateFormat.parse(endday);
 				sday = dateFormat.parse(borrowday);
 
+				System.out.println();
 				int compare = eday.compareTo(sday);
-
 				if (compare < 0) {
 					System.out.println(dm.toString(sday) + "보다 큰 날짜를 입력하세요.");
 					return null;
@@ -174,7 +179,7 @@ public class BookTransactionImpl implements BookTransaction {
 						System.out.println();
 						return vo;
 					}
-				} else {
+				} else {// compare값이 0인 경우
 					// 삭제 연산
 					book.setAmount(book.getAmount() + 1);// 수량 원복
 					vo.setEndDate(endDate);
