@@ -80,7 +80,7 @@ public class UserManageImpl implements UserManage {
 			System.out.println("존재하지 않는 계정입니다.");
 			return;
 		} else if (!pw.equals(vo.getPw())) {
-			System.out.println("비밀번호가 틀렸습니다.");
+			System.out.println("아이디와 비밀번호가 일치하지 않습니다."); //강사님이! 아이디나 비밀번호 틀렸을 땐 알려주면 안된다고 했던거 생각해서 수정했습니다!
 			return;
 		}
 
