@@ -52,7 +52,12 @@ public class BookTransactionImpl implements BookTransaction {
 			System.out.println("올바르지 않은 코드를 입력하셨습니다.\n");
 			return null;
 		}
-		// LibraryStorage.getInstance().getBookList().remove(vo);
+		LibraryStorage ls = LibraryStorage.getInstance();
+		BookManageVO log = ls.getRental(code, user.getId());
+		if (log != null) {
+			System.out.println("이미 대여 중입니다.");
+			return null;
+		}
 
 		// 수량 파악
 		int amount = vo.getAmount() - 1;
@@ -84,6 +89,17 @@ public class BookTransactionImpl implements BookTransaction {
 
 		System.out.print("반납할 책코드 ? ");
 		String code = sc.next();
+		BookVO book = readBook(code);
+		if (book == null) {
+			System.out.println("올바르지 않은 코드를 입력하셨습니다.\n");
+			return null;
+		}
+		LibraryStorage ls = LibraryStorage.getInstance();
+		BookManageVO log = ls.getRental(code, vo.getId());
+		if (log == null || (log != null && log.getEndDate() != null)) {
+			System.out.println("대여하지 않은 책이거나 이미 반납하셨습니다.");
+			return null;
+		}
 
 		System.out.println("반납일 입력(2020-02-27)");
 		endDateStr = sc.next();
@@ -94,6 +110,14 @@ public class BookTransactionImpl implements BookTransaction {
 
 	@Override
 	public BookManageVO returnBook(BookManageVO vo) {
+		if (vo == null) {
+			System.out.println("등록되지 않은 책 코드입니다.");
+			return null;
+		}
+		if (vo.getEndDate() != null) {
+			System.out.println("이미 반납하셨습니다.");
+			return vo;
+		}
 		return returnBook(vo.getIsbn13(), new Date());
 	}
 

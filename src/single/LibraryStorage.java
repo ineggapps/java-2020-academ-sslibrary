@@ -76,6 +76,19 @@ public class LibraryStorage {
 		return rentalList;
 	}
 
+	public BookManageVO getRental(String isbn13, String id) {
+		if (isbn13 == null || id == null) {
+			System.out.println("올바르게 입력되지 않았습니다.");
+			return null;
+		}
+		for (BookManageVO vo : rentalList) {
+			if (vo.getIsbn13().equals(isbn13) && vo.getId().equals(id)) {
+				return vo;
+			}
+		}
+		return null;
+	}
+
 	public BookVO getBook(BookManageVO vo) {
 		return bookList.get(vo.getIsbn13());
 	}
