@@ -84,6 +84,6 @@ public class Dummy {
 	}
 
 	public int randomNumber() {
-		return (int) (Math.random() * 100);
+		return (int) (Math.random() * 5);
 	}
 }
