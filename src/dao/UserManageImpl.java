@@ -67,7 +67,6 @@ public class UserManageImpl implements UserManage {
 		System.out.print("비밀번호 입력 ? ");
 		pw = sc.next();
 
-		System.out.println(id + ", " + pw);
 		if (id.equals(ADMIN_ID) && pw.equals(ADMIN_PW)) {
 			System.out.println("관리자로 로그인하셨습니다!");
 			LibraryStorage.getInstance().setLoginMember(new UserVO(ADMIN_ID, ADMIN_PW, "관리자"));
@@ -84,8 +83,8 @@ public class UserManageImpl implements UserManage {
 			return;
 		}
 
+		System.out.println(vo.getName() +"님이 로그인하셨습니다.");
 		LibraryStorage.getInstance().setLoginMember(vo);
-		System.out.println("로그인하셨습니다.");
 	}
 
 	
