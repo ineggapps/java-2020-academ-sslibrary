@@ -179,7 +179,7 @@ public class BookTransactionImpl implements BookTransaction {
 					book.setAmount(book.getAmount() + 1);// 수량 원복
 					vo.setEndDate(endDate);
 					// 안내문구 출력
-					System.out.println("당일 반납하셨습니다. (" + dm.toString(new Date()) + ")");
+					System.out.println("당일 반납하셨습니다. (" + dm.toString(endDate) + ")");
 					return vo;
 				}
 
