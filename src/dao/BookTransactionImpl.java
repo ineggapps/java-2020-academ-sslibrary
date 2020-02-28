@@ -65,7 +65,7 @@ public class BookTransactionImpl implements BookTransaction {
 		}
 		vo.setAmount(amount);
 
-		System.out.println("대여가 완료되었습니다. ");
+		System.out.println("["+vo.getTitle()+"] 책 대여가 완료되었습니다. ");
 
 		BookManageVO rentalVO = new BookManageVO(code, user.getId(), new Date(), null);
 		rentalList.add(rentalVO);
