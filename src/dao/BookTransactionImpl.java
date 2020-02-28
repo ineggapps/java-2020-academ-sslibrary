@@ -70,7 +70,7 @@ public class BookTransactionImpl implements BookTransaction {
 		}
 		vo.setAmount(amount);
 
-		System.out.println("["+vo.getTitle()+"] 책 대여가 완료되었습니다. ");
+		System.out.println("[" + vo.getTitle() + "] 책 대여가 완료되었습니다. ");
 
 		BookManageVO rentalVO = new BookManageVO(code, user.getId(), new Date(), null);
 		rentalList.add(rentalVO);
@@ -107,8 +107,7 @@ public class BookTransactionImpl implements BookTransaction {
 		System.out.print("반납일 입력(yyyy-mm-dd) > ");
 		endDateStr = sc.next();
 		endDate = dm.toDate(endDateStr);
-		
-		
+
 		return returnBook(code, endDate);
 	}
 
@@ -134,38 +133,37 @@ public class BookTransactionImpl implements BookTransaction {
 			System.out.println("유효하지 않은 날짜 정보를 입력하셨습니다.");
 			return null;
 		}
-		
+
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		for (BookManageVO vo : rentalList) {
 			BookVO book = bookList.get(vo.getIsbn13());
 			String bookTitle = book.getTitle();
 			String isbn = vo.getIsbn13();
 			String id = vo.getId();
-			
-			//반납일자가 대여일자보다 크면 반납해주고, 적으면 반납 못하도록.
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.KOREA);
-			
-			//대여일자
+
+			// 반납일자가 대여일자보다 크면 반납해주고, 적으면 반납 못하도록.
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+
+			// 대여일자
 			Date sday = vo.getStartDate();
 			String borrowday = new SimpleDateFormat("yyyy-MM-dd").format(sday);
-			
-			//반납일자
-			Date eday  = endDate;
+
+			// 반납일자
+			Date eday = endDate;
 			String endday = new SimpleDateFormat("yyyy-MM-dd").format(eday);
-			
-		
+
 			try {
 				eday = dateFormat.parse(endday);
 				sday = dateFormat.parse(borrowday);
-				
+
 				int compare = eday.compareTo(sday);
-				
-				if(compare < 0) {
-					System.out.println(dm.toString(sday)+"보다 큰 날짜를 입력하세요.");
+
+				if (compare < 0) {
+					System.out.println(dm.toString(sday) + "보다 큰 날짜를 입력하세요.");
 					return null;
-				}else if(compare > 0){
-					System.out.println(dm.toString(eday)+"까지 반납해주세요.");
-					
+				} else if (compare > 0) {
+					System.out.println(dm.toString(eday) + "까지 반납해주세요.");
+
 					if (isbn.equals(code) && id.equals(user.getId())) {
 						// 삭제 연산
 						book.setAmount(book.getAmount() + 1);// 수량 원복
@@ -175,11 +173,15 @@ public class BookTransactionImpl implements BookTransaction {
 						System.out.println();
 						return vo;
 					}
-				}else {
-					System.out.println("당일 반납하셨습니다. ("+dm.toString(new Date())+")");
+				} else {
+					// 삭제 연산
+					book.setAmount(book.getAmount() + 1);// 수량 원복
+					vo.setEndDate(endDate);
+					//안내문구 출력
+					System.out.println("당일 반납하셨습니다. (" + dm.toString(new Date()) + ")");
 					return vo;
 				}
-				
+
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
