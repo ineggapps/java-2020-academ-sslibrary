@@ -161,10 +161,10 @@ public class BookTransactionImpl implements BookTransaction {
 				int compare = eday.compareTo(sday);
 				
 				if(compare < 0) {
-					System.out.println(sday+"보다 큰 날짜를 입력하세요.");
+					System.out.println(dm.toString(sday)+"보다 큰 날짜를 입력하세요.");
 					return null;
 				}else if(compare > 0){
-					System.out.println(eday+"까지 반납해주세요.");
+					System.out.println(dm.toString(eday)+"까지 반납해주세요.");
 					
 					if (isbn.equals(code) && id.equals(user.getId())) {
 						// 삭제 연산
@@ -176,7 +176,7 @@ public class BookTransactionImpl implements BookTransaction {
 						return vo;
 					}
 				}else {
-					System.out.println("당일 반납하셨습니다.");
+					System.out.println("당일 반납하셨습니다. ("+dm.toString(new Date())+")");
 					return vo;
 				}
 				
