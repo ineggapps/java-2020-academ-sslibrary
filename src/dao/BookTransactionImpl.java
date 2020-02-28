@@ -162,6 +162,7 @@ public class BookTransactionImpl implements BookTransaction {
 				
 				if(compare < 0) {
 					System.out.println(sday+"보다 큰 날짜를 입력하세요.");
+					return null;
 				}else if(compare > 0){
 					System.out.println(eday+"까지 반납해주세요.");
 					
@@ -176,6 +177,7 @@ public class BookTransactionImpl implements BookTransaction {
 					}
 				}else {
 					System.out.println("당일 반납하셨습니다.");
+					return vo;
 				}
 				
 			} catch (ParseException e) {
