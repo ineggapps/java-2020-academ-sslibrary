@@ -78,7 +78,7 @@ public class LibraryServiceImpl implements LibraryService {
 		ch = sc.nextInt();
 		switch (ch) {
 		case 1:
-			System.out.print("1.도서목록조회 2. 도서등록 3.도서수정 4.도서삭제 5.도서검색 6.대여목록조회 7.이전메뉴 > ");
+			System.out.print("1.도서목록조회 2. 도서등록 3.도서수정 4.도서삭제 5.도서검색 6.대여목록조회 7.종료 > ");
 			ch = sc.nextInt();
 			switch (ch) {
 			case 1:// 도서목록조회
@@ -154,7 +154,7 @@ public class LibraryServiceImpl implements LibraryService {
 		System.out.println("\n===원하시는 메뉴를 고르시오===");
 		int ch;
 		System.out.println("\n===사용자 메뉴===");
-		System.out.print("1.도서대여 2.도서반납 3.도서검색 4.로그아웃 5.정보수정 6.탈퇴 7.이전메뉴 > ");
+		System.out.print("1.도서대여 2.도서반납 3.도서검색 4.로그아웃 5.정보수정 6.탈퇴 > ");
 		ch = sc.nextInt();
 		switch (ch) {
 		case 1:// 도서대여
@@ -189,8 +189,6 @@ public class LibraryServiceImpl implements LibraryService {
 		case 6:
 			um.out();// 탈퇴
 			break;
-		case 7: // 이전 메뉴로
-			return false;
 		}
 		return true;
 	}
