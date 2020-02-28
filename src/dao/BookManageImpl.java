@@ -24,8 +24,13 @@ public class BookManageImpl implements BookManage {
 			BookVO vo = new BookVO();
 			String isbn;
 			System.out.print("등록할 도서의 ISBN(13자리)을 입력해주세요... > ");
-			isbn = sc.next();
+			isbn = sc.nextLine();
 			vo.setISBN13(isbn);
+
+			if (isbn.length() != 13) {
+				System.out.println("도서코드는 13자리로 입력해 주세요. 처음으로 돌아갑니다.");
+				return ;
+			}
 
 			System.out.print("도서명 ? ");
 			vo.setTitle(sc.nextLine());
@@ -38,6 +43,7 @@ public class BookManageImpl implements BookManage {
 			if (releaseDate == null) {
 				throw new Exception("날짜가 올바르지 않습니다. 2020-02-27 형식으로 입력해 주세요.");
 			}
+			sc.nextLine();
 			vo.setReleaseDate(releaseDate);
 			System.out.print("분야 ? ");
 			vo.setField(sc.nextLine());

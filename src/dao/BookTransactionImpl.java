@@ -48,7 +48,11 @@ public class BookTransactionImpl implements BookTransaction {
 		bm.listBook();
 
 		System.out.print("대여할 책코드 ? ");
-		code = sc.next();
+		code = sc.nextLine();
+		if (code.length() != 13) {
+			System.out.println("도서코드는 13자리로 입력해 주세요. 처음으로 돌아갑니다.");
+			return null;
+		}
 
 		BookVO vo = readBook(code);
 		if (vo == null) {
@@ -138,9 +142,9 @@ public class BookTransactionImpl implements BookTransaction {
 
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		for (BookManageVO vo : rentalList) {
-			if(!vo.getIsbn13().equals(code)) {
-				//복수 개의 대출 중인 상황에서는 어떤 책을 반납할 것인가에 달렸다.
-				//대출 중이지만 반납하고자 하는 책이 아니라면 이번 요소 vo는 건너뛴다.
+			if (!vo.getIsbn13().equals(code)) {
+				// 복수 개의 대출 중인 상황에서는 어떤 책을 반납할 것인가에 달렸다.
+				// 대출 중이지만 반납하고자 하는 책이 아니라면 이번 요소 vo는 건너뛴다.
 				continue;
 			}
 			BookVO book = bookList.get(vo.getIsbn13());
