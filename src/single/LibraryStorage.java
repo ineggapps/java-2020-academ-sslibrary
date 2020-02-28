@@ -76,13 +76,15 @@ public class LibraryStorage {
 		return rentalList;
 	}
 
-	public BookManageVO getRental(String isbn13, String id) {
+	public BookManageVO getRentalNotReturn(String isbn13, String id) { // 대여 중인 것만 나온다.
 		if (isbn13 == null || id == null) {
 			System.out.println("올바르게 입력되지 않았습니다.");
 			return null;
 		}
 		for (BookManageVO vo : rentalList) {
-			if (vo.getIsbn13().equals(isbn13) && vo.getId().equals(id)) {
+			boolean amI = vo.getIsbn13().equals(isbn13) && vo.getId().equals(id);
+			boolean isRentalNow = vo.getStartDate() != null && vo.getEndDate() == null;
+			if (amI && isRentalNow) {
 				return vo;
 			}
 		}

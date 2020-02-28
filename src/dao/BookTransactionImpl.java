@@ -56,8 +56,9 @@ public class BookTransactionImpl implements BookTransaction {
 			return null;
 		}
 		LibraryStorage ls = LibraryStorage.getInstance();
-		BookManageVO log = ls.getRental(code, user.getId());
-		if (log != null) {
+		BookManageVO log = ls.getRentalNotReturn(code, user.getId());
+		// Case 1. 반납이 끝나고 다시 대여를 할 수도 있다.
+		if (log != null && (log.getStartDate() != null && log.getEndDate() == null)) {
 			System.out.println("이미 대여 중입니다.");
 			return null;
 		}
@@ -68,8 +69,9 @@ public class BookTransactionImpl implements BookTransaction {
 			System.out.println("현재 " + vo.getTitle() + "의 모든 책이 대출 중입니다. 반납되는 대로 추후 연락드리겠습니다.");
 			return null;
 		}
+		System.out.println("우리 도서관의 [" + vo.getTitle() + "] 서적의 재고는 " + vo.getAmount() + "권 => " + (vo.getAmount() - 1)
+				+ "권이 됩니다.");
 		vo.setAmount(amount);
-
 		System.out.println("[" + vo.getTitle() + "] 책 대여가 완료되었습니다. ");
 
 		BookManageVO rentalVO = new BookManageVO(code, user.getId(), new Date(), null);
@@ -98,7 +100,7 @@ public class BookTransactionImpl implements BookTransaction {
 			return null;
 		}
 		LibraryStorage ls = LibraryStorage.getInstance();
-		BookManageVO log = ls.getRental(code, vo.getId());
+		BookManageVO log = ls.getRentalNotReturn(code, vo.getId());
 		if (log == null || (log != null && log.getEndDate() != null)) {
 			System.out.println("대여하지 않은 책이거나 이미 반납하셨습니다.");
 			return null;
@@ -177,7 +179,7 @@ public class BookTransactionImpl implements BookTransaction {
 					// 삭제 연산
 					book.setAmount(book.getAmount() + 1);// 수량 원복
 					vo.setEndDate(endDate);
-					//안내문구 출력
+					// 안내문구 출력
 					System.out.println("당일 반납하셨습니다. (" + dm.toString(new Date()) + ")");
 					return vo;
 				}
