@@ -6,9 +6,8 @@ import vo.BookManageVO;
 
 public interface BookTransaction {
 	/** 책 검색(관리자의 도서명 검색), 대여, 반납 */
-	//관리자의 도서명 검색은 다혜의 도서명 검색 메서드를 이용하여도 무방함
-	//다혜의 도서명 메서드를 이용할 경우 의존관계가 발생함.
-	public void bookTransaction(BookManageVO vo);
+	//대여 시: BookManager에서 도서 목록 출력
+	//반납 시: BookState에서 대여 중인 도서 목록만 출력
 	public BookManageVO rentalBook();
 	//오버로딩
 	public BookManageVO returnBook();

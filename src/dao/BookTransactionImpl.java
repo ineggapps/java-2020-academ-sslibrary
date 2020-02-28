@@ -32,11 +32,6 @@ public class BookTransactionImpl implements BookTransaction {
 		return user;
 	}
 
-	@Override
-	public void bookTransaction(BookManageVO vo) {
-		UserVO user = getUser();
-	}
-
 //´ë¿©
 	@Override
 	public BookManageVO rentalBook() {
