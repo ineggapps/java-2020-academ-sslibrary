@@ -28,11 +28,11 @@ public class BookManageImpl implements BookManage {
 			vo.setISBN13(isbn);
 
 			System.out.print("도서명 ? ");
-			vo.setTitle(sc.next());
+			vo.setTitle(sc.nextLine());
 			System.out.print("저자 ? ");
-			vo.setAuthor(sc.next());
+			vo.setAuthor(sc.nextLine());
 			System.out.print("출판사 ? ");
-			vo.setPublisher(sc.next());
+			vo.setPublisher(sc.nextLine());
 			System.out.print("출시일 ? ");
 			Date releaseDate = dm.toDate(sc.next());
 			if (releaseDate == null) {
@@ -40,7 +40,7 @@ public class BookManageImpl implements BookManage {
 			}
 			vo.setReleaseDate(releaseDate);
 			System.out.print("분야 ? ");
-			vo.setField(sc.next());
+			vo.setField(sc.nextLine());
 			System.out.print("등록할 도서 수량? ");
 			vo.setAmount(sc.nextInt());
 
@@ -71,15 +71,15 @@ public class BookManageImpl implements BookManage {
 		}
 		try {
 			System.out.print("도서명 ? ");
-			vo.setTitle(sc.next());
+			vo.setTitle(sc.nextLine());
 			System.out.print("저자 ? ");
-			vo.setAuthor(sc.next());
+			vo.setAuthor(sc.nextLine());
 			System.out.print("출판사 ? ");
-			vo.setPublisher(sc.next());
+			vo.setPublisher(sc.nextLine());
 			System.out.print("출시일 ? ");
 			vo.setReleaseDate(dm.toDate(sc.next()));
 			System.out.print("분야 ? ");
-			vo.setField(sc.next());
+			vo.setField(sc.nextLine());
 
 			bookList.put(isbn, vo);
 			System.out.println("도서 수정완료....\n");
