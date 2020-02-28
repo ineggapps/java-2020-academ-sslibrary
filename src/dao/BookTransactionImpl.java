@@ -1,8 +1,11 @@
 package dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -62,7 +65,7 @@ public class BookTransactionImpl implements BookTransaction {
 		}
 		vo.setAmount(amount);
 
-		System.out.println("대여가 완료되었습니다. ");
+		System.out.println("["+vo.getTitle()+"] 책 대여가 완료되었습니다. ");
 
 		BookManageVO rentalVO = new BookManageVO(code, user.getId(), new Date(), null);
 		rentalList.add(rentalVO);
@@ -85,10 +88,11 @@ public class BookTransactionImpl implements BookTransaction {
 		System.out.print("반납할 책코드 ? ");
 		String code = sc.next();
 
-		System.out.println("반납일 입력(2020-02-27)");
+		System.out.print("반납일 입력(yyyy-mm-dd) > ");
 		endDateStr = sc.next();
 		endDate = dm.toDate(endDateStr);
-
+		
+		
 		return returnBook(code, endDate);
 	}
 
@@ -106,21 +110,52 @@ public class BookTransactionImpl implements BookTransaction {
 			System.out.println("유효하지 않은 날짜 정보를 입력하셨습니다.");
 			return null;
 		}
-
+		
 		Map<String, BookVO> bookList = LibraryStorage.getInstance().getBookList();
 		for (BookManageVO vo : rentalList) {
 			BookVO book = bookList.get(vo.getIsbn13());
 			String bookTitle = book.getTitle();
 			String isbn = vo.getIsbn13();
 			String id = vo.getId();
-			if (isbn.equals(code) && id.equals(user.getId())) {
-				// 삭제 연산
-				book.setAmount(book.getAmount() + 1);// 수량 원복
-				vo.setEndDate(endDate);
-				// 안내 문구 출력
-				System.out.printf("%s님께서 빌려가신 %s 책이 %s부로 반납 처리되었습니다.", name, bookTitle, dm.toString(endDate));
-				System.out.println();
-				return vo;
+			
+			//반납일자가 대여일자보다 크면 반납해주고, 적으면 반납 못하도록.
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.KOREA);
+			
+			//대여일자
+			Date sday = vo.getStartDate();
+			String borrowday = new SimpleDateFormat("yyyy-MM-dd").format(sday);
+			
+			//반납일자
+			Date eday  = endDate;
+			String endday = new SimpleDateFormat("yyyy-MM-dd").format(eday);
+			
+		
+			try {
+				eday = dateFormat.parse(endday);
+				sday = dateFormat.parse(borrowday);
+				
+				int compare = eday.compareTo(sday);
+				
+				if(compare < 0) {
+					System.out.println(sday+"보다 큰 날짜를 입력하세요.");
+				}else if(compare > 0){
+					System.out.println(eday+"까지 반납해주세요.");
+					
+					if (isbn.equals(code) && id.equals(user.getId())) {
+						// 삭제 연산
+						book.setAmount(book.getAmount() + 1);// 수량 원복
+						vo.setEndDate(endDate);
+						// 안내 문구 출력
+						System.out.printf("%s님께서 빌려가신 %s 책이 %s부로 반납 처리되었습니다.", name, bookTitle, dm.toString(endDate));
+						System.out.println();
+						return vo;
+					}
+				}else {
+					System.out.println("당일 반납하셨습니다.");
+				}
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
 		}
 		return null;
