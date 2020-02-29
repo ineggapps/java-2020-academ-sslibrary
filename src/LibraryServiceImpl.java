@@ -34,7 +34,7 @@ public class LibraryServiceImpl implements LibraryService {
 				if (loginMember == null) {
 					// 비로그인 상태
 					isGoing = showDefaultMenu();
-				} else if (loginMember.getId().equals(ADMIN_ID)) {
+				} else if (loginMember.getId().equals(UserManage.ADMIN_ID)) {
 					// 관리자 상태
 					isGoing = showAdminMenu();
 				} else {
